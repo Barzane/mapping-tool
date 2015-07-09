@@ -7,6 +7,7 @@ import mexico_us_canada_us_border_dictionary
 import coast_border_dictionary
 import plot_map_with_airports
 import plot_blank_map
+import add_routes_to_map
 
 print
 
@@ -57,10 +58,26 @@ dst = '..\\input\\data_' + str(year) + '_' + str(quarter) + '.bin'
 
 shutil.copyfile(src, dst)
 
-print 'plot map with airports for ' + dst + ', save to \output'
+print 'plot map with airports for ' + dst + ', save .png to \output, .bin to \\temp'
 
 plot_map_with_airports.plot(dst, year, quarter)
-  
+
+print 'add routes to map with airports'
+
+route_list=[['BHM','ATL'],\
+            ['BHM','BNA'],\
+            ['BHM','LIT'],\
+            ['BHM','AUS'],\
+            ['BHM','ECP'],\
+            ['BHM','MCO'],\
+            ['BHM','STL'],\
+            ['BHM','GSP'],\
+            ['BHM','BLI']]
+
+add_routes_to_map.add_routes(year, quarter, route_list, line_type='geodesic')
+
+print '[warning] \\temp airport instances must be regenerated for other periods'
+
 print 'move pyc files (byte code) from \code to \\temp'
 
 src = '.\\'

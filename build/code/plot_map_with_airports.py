@@ -2,36 +2,18 @@
 
 import cPickle, matplotlib
 
+#http://stackoverflow.com/questions/4142151/python-how-to-import-the-class-within-the-same-directory-or-sub-directory
+
+from airport_classes import *
+
 matplotlib.pyplot.ioff()
-
-class IterRegistry(type):
-
-#    http://stackoverflow.com/questions/739882/iterating-over-object-instances-of-a-given-class-in-python
-    
-    def __iter__(cls):
-        return iter(cls._registry)
-        
-class Airport:
-    
-    __metaclass__ = IterRegistry
-    _registry = []
-
-    def __init__(self, x, y, name):
-        
-        self._registry.append(self)
-        
-#        longitude (x) and latitude (y), in degrees
-        
-        self.x = float(x)
-        self.y = float(y)
-        
-        self.name = name
         
 def plot(src, year, quarter):
     
     src_blank_map = '..\\..\\data\\borders\\blank_map.bin'
     
-    dst = '..\\output\\map_' + str(year) + '_' + str(quarter) + '.png'
+    dst_png = '..\\output\\map_' + str(year) + '_' + str(quarter) + '.png'
+    dst_bin = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.bin'
 
     f = open(src_blank_map, 'r')
     fig = cPickle.load(f)
@@ -56,16 +38,24 @@ def plot(src, year, quarter):
         if destination not in airport_dict:
             airport_dict[destination] = Airport(data[key]['destinationLongitude'],\
                 data[key]['destinationLatitude'], destination)
-            
+    
     for airport in Airport:
         
         matplotlib.pyplot.plot(airport.x, airport.y, 'ro')
         matplotlib.pyplot.annotate(airport.name, ([airport.x, airport.y]))
+        
+        f = open('..\\temp\\airport_' + airport.name + '.bin', 'wb')
+        cPickle.dump(airport, f)
+        f.close()        
     
     matplotlib.pyplot.title('AIRPORTS IN DATASET: ' + str(year) + 'Q' +\
         str(quarter))    
     
-    matplotlib.pyplot.savefig(dst, bbox_inches='tight')
+    f = open(dst_bin, 'w')
+    cPickle.dump(fig, f)
+    f.close()
+    
+    matplotlib.pyplot.savefig(dst_png, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
     
     return None
