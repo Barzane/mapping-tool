@@ -4,6 +4,7 @@ import os, glob, shutil
 
 import state_state_border_dictionary
 import mexico_us_canada_us_border_dictionary
+import coast_border_dictionary
 
 print
 
@@ -23,6 +24,11 @@ state_state_border_dictionary.build_dict()
 print 'build US-Mexico and US-Canada border dictionary, save to \\input'
 
 mexico_us_canada_us_border_dictionary.build_dict()
+
+print 'US coast border dictionary, save to \\input'
+
+coast_border_dictionary.build_dict()
+
 
 #    
 #    print 'copy data_year_quarter.bin datafile from ..\data to \input'
