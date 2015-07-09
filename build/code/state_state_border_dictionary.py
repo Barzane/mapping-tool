@@ -5,7 +5,7 @@ import cPickle
 def build_dict():
     
     src = '..\\..\\data\\borders\\bordpnts.asc'
-    dst = '..\\input\\border_dict.bin'    
+    dst = '..\\input\\state_state_border_dict.bin'    
     
     border_dict = {}
 
