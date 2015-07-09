@@ -11,7 +11,7 @@ def build_dict():
 
     f = open(src, 'r')
 
-    count=0
+    count = 0
         
     for line in f:
         

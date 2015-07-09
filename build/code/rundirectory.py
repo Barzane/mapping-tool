@@ -74,11 +74,3 @@ for folder in [src + '*.pyc']:
         
         filename_split = filename.split('\\')[-1]
         shutil.move(filename, dst + filename_split)
-           
-#    
-#    print 'move bin from \\temp to \output'
-#    
-#    src = '..\\temp\\data_' + str(year) + '_' + str(quarter) + '.bin'
-#    dst = '..\\output\\data_' + str(year) + '_' + str(quarter) + '.bin'
-#    
-#    shutil.move(src, dst)
