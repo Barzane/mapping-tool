@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import cPickle, matplotlib
+
+matplotlib.pyplot.ioff()
         
 def plot():
     
@@ -48,6 +50,9 @@ def plot():
                 color='b', linestyle='-')    
     
 #    http://stackoverflow.com/questions/7290370/store-and-reload-matplotlib-pyplot-object
+    
+    fig.set_size_inches(8, 6, forward=True)
+    fig.tight_layout()
     
     f = open(dst, 'w')
     cPickle.dump(fig, f)

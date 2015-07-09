@@ -57,9 +57,9 @@ dst = '..\\input\\data_' + str(year) + '_' + str(quarter) + '.bin'
 
 shutil.copyfile(src, dst)
 
-#print 'plot map with airports for ' + dst
-#
-#plot_map_with_airports.plot(dst, year, quarter)
+print 'plot map with airports for ' + dst + ', save to \output'
+
+plot_map_with_airports.plot(dst, year, quarter)
   
 print 'move pyc files (byte code) from \code to \\temp'
 
