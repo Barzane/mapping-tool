@@ -99,4 +99,12 @@ def plot(src, year, quarter):
     
     matplotlib.pyplot.show()
     
+#    f = open('..\\temp\\test.bin', 'w')
+#    cPickle.dump(fig, f)
+#    f.close()
+    
+#    f = open('..\\temp\\test.bin', 'r')
+#    ffig = cPickle.load(f)
+#    f.close()
+    
     return None
