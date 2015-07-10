@@ -60,6 +60,7 @@ def add_routes(year, quarter, route_list, line_type):
             end2 = route[0][1]
             
 #            for UA 2013Q4 geodesic, not needed in general (error in list construction)
+
             end1 = end1.strip()
             end2 = end2.strip() 
             
@@ -104,9 +105,13 @@ def add_routes(year, quarter, route_list, line_type):
         return None    
     
     if line_type == 'linear':
+        
         add_route_to_plot(route_list)
+        
     elif line_type == 'geodesic':
+        
         add_geodesic_to_plot(route_list)
+        
     else:
         raise NotImplementedError('line type must be linear or geodesic')
     

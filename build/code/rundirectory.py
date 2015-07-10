@@ -49,7 +49,7 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-year = 2013
+year = 2003
 quarter = 4
   
 print 'copy data_year_quarter.bin datafile from ..\data to \input'
