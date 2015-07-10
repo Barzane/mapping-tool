@@ -64,15 +64,15 @@ plot_map_with_airports.plot(dst, year, quarter)
 
 print 'add routes to map with airports'
 
-route_list=[['BHM','ATL'],\
-            ['BHM','BNA'],\
-            ['BHM','LIT'],\
-            ['BHM','AUS'],\
-            ['BHM','ECP'],\
-            ['BHM','MCO'],\
-            ['BHM','STL'],\
-            ['BHM','GSP'],\
-            ['BHM','BLI']]
+route_list=[(['BHM','ATL'], 1.0),\
+            (['BHM','BNA'], 1.0),\
+            (['BHM','LIT'], 1.0),\
+            (['BHM','AUS'], 1.0),\
+            (['BHM','ECP'], 1.0),\
+            (['BHM','MCO'], 1.0),\
+            (['BHM','STL'], 1.0),\
+            (['BHM','GSP'], 1.0),\
+            (['BHM','BLI'], 1.0)]
 
 add_routes_to_map.add_routes(year, quarter, route_list, line_type='geodesic')
 

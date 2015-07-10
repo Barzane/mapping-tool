@@ -39,7 +39,7 @@ def add_routes(year, quarter, route_list, line_type):
             
             for airport in Airport:
                 
-                for node in route:
+                for node in route[0]:
                     
                     if airport.name == node:
                         x.append(airport.x)
@@ -48,7 +48,7 @@ def add_routes(year, quarter, route_list, line_type):
             if len(x) != 2:
                 raise Exception('missing node')
                 
-            matplotlib.pyplot.plot(x, y, color=col, linestyle='-', linewidth=lwd)
+            matplotlib.pyplot.plot(x, y, color=col, linestyle='-', linewidth=route[1]*lwd)
         
         return None
     
@@ -56,8 +56,8 @@ def add_routes(year, quarter, route_list, line_type):
             
         for route in routes:
             
-            end1 = route[0]
-            end2 = route[1]
+            end1 = route[0][0]
+            end2 = route[0][1]
             
 #            for UA 2013Q4 geodesic, not needed in general (error in list construction)
             end1 = end1.strip()
@@ -99,7 +99,7 @@ def add_routes(year, quarter, route_list, line_type):
             lX = degree(lX)
             pY = degree(pY)
             
-            matplotlib.pyplot.plot(lX, pY, color=col, linestyle='-', linewidth=lwd)
+            matplotlib.pyplot.plot(lX, pY, color=col, linestyle='-', linewidth=route[1]*lwd)
         
         return None    
     
