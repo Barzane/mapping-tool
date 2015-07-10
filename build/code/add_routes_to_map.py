@@ -30,7 +30,7 @@ def add_routes(year, quarter, route_list, line_type):
         airport = cPickle.load(f)
         f.close()
     
-    def add_route_to_plot(routes, col='k', lwd=3.0):
+    def add_route_to_plot(routes, col='k', lwd=5.0):
             
         for route in routes:
             
@@ -52,7 +52,7 @@ def add_routes(year, quarter, route_list, line_type):
         
         return None
     
-    def add_geodesic_to_plot(routes, col='k', lwd=3.0):
+    def add_geodesic_to_plot(routes, col='k', lwd=5.0):
             
         for route in routes:
             

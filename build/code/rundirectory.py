@@ -8,6 +8,7 @@ import coast_border_dictionary
 import plot_map_with_airports
 import plot_blank_map
 import add_routes_to_map
+import make_route_list
 
 print
 
@@ -64,15 +65,16 @@ plot_map_with_airports.plot(dst, year, quarter)
 
 print 'add routes to map with airports'
 
-route_list=[(['BHM','ATL'], 1.0),\
-            (['BHM','BNA'], 1.0),\
-            (['BHM','LIT'], 1.0),\
-            (['BHM','AUS'], 1.0),\
-            (['BHM','ECP'], 1.0),\
-            (['BHM','MCO'], 1.0),\
-            (['BHM','STL'], 1.0),\
-            (['BHM','GSP'], 1.0),\
-            (['BHM','BLI'], 1.0)]
+#https://docs.python.org/2/tutorial/controlflow.html#unpacking-argument-lists
+
+route_options = {}
+route_options['year'] = year
+route_options['quarter'] = quarter
+route_options['carrier'] = 'WN'
+route_options['test'] = False
+route_options['constant_weight'] = False
+
+route_list = make_route_list.route(**route_options)
 
 add_routes_to_map.add_routes(year, quarter, route_list, line_type='geodesic')
 
