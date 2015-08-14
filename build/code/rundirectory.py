@@ -11,7 +11,6 @@ import add_routes_to_map
 import make_route_list
 
 print
-
 print 'clear contents of \output and \\temp and \input'
 
 for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
@@ -49,7 +48,7 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-year = 2003
+year = 2013
 quarter = 4
   
 print 'copy data_year_quarter.bin datafile from ..\data to \input'
