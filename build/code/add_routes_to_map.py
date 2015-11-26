@@ -15,7 +15,7 @@ def degree(radian):
 def add_routes(year, quarter, route_list, line_type):
     
     src = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.bin'
-    
+
     dst_png = '..\\output\\map_with_routes_' + str(year) + '_' + str(quarter) + '.png'
     
     f = open(src, 'r')
@@ -46,6 +46,7 @@ def add_routes(year, quarter, route_list, line_type):
                         y.append(airport.y)
                         
             if len(x) != 2:
+                
                 raise Exception('missing node')
                 
             matplotlib.pyplot.plot(x, y, color=col, linestyle='-', linewidth=route[1]*lwd)
@@ -113,8 +114,10 @@ def add_routes(year, quarter, route_list, line_type):
         add_geodesic_to_plot(route_list)
         
     else:
+        
         raise NotImplementedError('line type must be linear or geodesic')
     
     matplotlib.pyplot.savefig(dst_png, bbox_inches='tight')
-        
+    matplotlib.pyplot.close(fig)
+    
     return None

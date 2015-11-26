@@ -47,6 +47,7 @@ def route(year, quarter, carrier, test, constant_weight):
                 pass
         
         if pax_list == []:
+            
             raise IndexError('no carrier ' + carrier + ' in data')
         
         max_pax = max(pax_list)

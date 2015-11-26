@@ -9,10 +9,12 @@ from airport_classes import *
 matplotlib.pyplot.ioff()
         
 def plot(src, year, quarter):
+
+    matplotlib.pyplot.close('all')
     
     src_blank_map = '..\\..\\data\\borders\\blank_map.bin'
     
-    dst_png = '..\\output\\map_' + str(year) + '_' + str(quarter) + '.png'
+    dst_png = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.png'
     dst_bin = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.bin'
 
     f = open(src_blank_map, 'r')
@@ -37,7 +39,7 @@ def plot(src, year, quarter):
         
         if destination not in airport_dict:
             airport_dict[destination] = Airport(data[key]['destinationLongitude'],\
-                data[key]['destinationLatitude'], destination)
+                data[key]['destinationLatitude'], destination)   
     
     for airport in Airport:
         
@@ -49,11 +51,11 @@ def plot(src, year, quarter):
         f.close()        
     
     matplotlib.pyplot.title('AIRPORTS IN DATASET: ' + str(year) + 'Q' +\
-        str(quarter))    
+        str(quarter))
     
     f = open(dst_bin, 'w')
     cPickle.dump(fig, f)
-    f.close()
+    f.close()    
     
     matplotlib.pyplot.savefig(dst_png, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
