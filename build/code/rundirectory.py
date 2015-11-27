@@ -48,37 +48,38 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-year = 2013
-quarter = 4
-carrier = 'WN'
-  
-print 'copy data_year_quarter.bin datafile from ..\data to \input'
+for year in range(1999, 2014):
+    for quarter in range(1, 5):
 
-src = '..\\..\\data\\data_' + str(year) + '_' + str(quarter) + '.bin'
-dst = '..\\input\\data_' + str(year) + '_' + str(quarter) + '.bin'
-
-shutil.copyfile(src, dst)
-
-print 'plot map with airports for ' + dst + ', save .png to \output, .bin to \\temp'
-
-plot_map_with_airports.plot(dst, year, quarter)
-
-print 'add routes to map with airports'
-
-#https://docs.python.org/2/tutorial/controlflow.html#unpacking-argument-lists
-
-route_options = {}
-route_options['year'] = year
-route_options['quarter'] = quarter
-route_options['carrier'] = carrier
-route_options['test'] = False
-route_options['constant_weight'] = False
-
-route_list = make_route_list.route(**route_options)
-
-add_routes_to_map.add_routes(carrier, year, quarter, route_list, line_type='geodesic')
-
-print '[warning] \\temp airport instances must be regenerated for other periods'
+        carrier = 'WN'
+          
+        print 'copy data_year_quarter.bin datafile from ..\data to \input'
+        
+        src = '..\\..\\data\\data_' + str(year) + '_' + str(quarter) + '.bin'
+        dst = '..\\input\\data_' + str(year) + '_' + str(quarter) + '.bin'
+        
+        shutil.copyfile(src, dst)
+        
+        print 'plot map with airports for ' + dst + ', save .png to \output, .bin to \\temp'
+        
+        plot_map_with_airports.plot(dst, year, quarter)
+        
+        print 'add routes to map with airports'
+        
+        #https://docs.python.org/2/tutorial/controlflow.html#unpacking-argument-lists
+        
+        route_options = {}
+        route_options['year'] = year
+        route_options['quarter'] = quarter
+        route_options['carrier'] = carrier
+        route_options['test'] = False
+        route_options['constant_weight'] = False
+        
+        route_list = make_route_list.route(**route_options)
+        
+        add_routes_to_map.add_routes(carrier, year, quarter, route_list, line_type='geodesic')
+        
+        print '[warning] \\temp airport instances must be regenerated for other periods'
 
 print 'move pyc files (byte code) from \code to \\temp'
 
