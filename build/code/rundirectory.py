@@ -48,10 +48,10 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-for year in range(1999, 2014):
+for year in range(2013, 2014):
     for quarter in range(1, 5):
 
-        carrier = 'WN'
+        carrier = 'AA'
           
         print 'copy data_year_quarter.bin datafile from ..\data to \input'
         
@@ -75,8 +75,15 @@ for year in range(1999, 2014):
         route_options['test'] = False
         route_options['constant_weight'] = False
         
-        route_list = make_route_list.route(**route_options)
+        try:
+            
+            route_list = make_route_list.route(**route_options)
         
+        except IndexError:
+            
+            print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
+            sss
+            
         add_routes_to_map.add_routes(carrier, year, quarter, route_list, line_type='geodesic')
         
         print '[warning] \\temp airport instances must be regenerated for other periods'
