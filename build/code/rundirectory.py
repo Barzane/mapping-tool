@@ -48,7 +48,7 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-for year in range(2013, 2014):
+for year in range(1999, 2014):
     for quarter in range(1, 5):
 
         carrier = 'AA'
@@ -82,7 +82,8 @@ for year in range(2013, 2014):
         except IndexError:
             
             print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
-            sss
+            
+            continue
             
         add_routes_to_map.add_routes(carrier, year, quarter, route_list, line_type='geodesic')
         
