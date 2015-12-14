@@ -2,7 +2,7 @@
 
 import cPickle
 
-def route(year, quarter, carrier, test, constant_weight):
+def route(year, quarter, carrier, test, constant_weight, erdos_renyi, all_airports, g=None):
     
     if test:
         
@@ -15,6 +15,20 @@ def route(year, quarter, carrier, test, constant_weight):
                     (['BHM','STL'], 1.0),\
                     (['BHM','GSP'], 1.0),\
                     (['BHM','BLI'], 1.0)]    
+    
+    elif erdos_renyi:
+        
+        route_list = []
+
+        for i in range(len(g)):
+            for j in range(i, len(g)):
+                
+                if g[i][j] == 1:
+                    
+                    origin = all_airports[i][0]
+                    dest = all_airports[j][0]
+                    
+                    route_list.append(([origin, dest], 0.1)) #constant line-width
     
     else:
         

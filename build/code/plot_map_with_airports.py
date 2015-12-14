@@ -41,7 +41,11 @@ def plot(src, year, quarter):
             airport_dict[destination] = Airport(data[key]['destinationLongitude'],\
                 data[key]['destinationLatitude'], destination)   
     
+    all_airports = list()    
+    
     for airport in Airport:
+        
+        all_airports.append([airport.name, airport])
         
         matplotlib.pyplot.plot(airport.x, airport.y, 'ro')
         matplotlib.pyplot.annotate(airport.name, ([airport.x, airport.y]))
@@ -49,6 +53,8 @@ def plot(src, year, quarter):
         f = open('..\\temp\\airport_' + airport.name + '.bin', 'wb')
         cPickle.dump(airport, f)
         f.close()        
+    
+    all_airports.sort()
     
     matplotlib.pyplot.title('AIRPORTS IN DATASET: ' + str(year) + 'Q' +\
         str(quarter))
@@ -60,4 +66,4 @@ def plot(src, year, quarter):
     matplotlib.pyplot.savefig(dst_png, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
     
-    return None
+    return all_airports

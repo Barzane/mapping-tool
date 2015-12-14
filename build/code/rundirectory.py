@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, glob, shutil, os.path
+import os, glob, shutil, os.path, sys
 
 import state_state_border_dictionary
 import mexico_us_canada_us_border_dictionary
@@ -9,6 +9,13 @@ import plot_map_with_airports
 import plot_blank_map
 import add_routes_to_map
 import make_route_list
+
+src_random_network = '..\\..\\..\\network-evolution\\build\\code\\'
+
+#http://stackoverflow.com/questions/279237/import-a-module-from-a-relative-path
+sys.path.append(src_random_network)
+
+import random_network
 
 print
 print 'clear contents of \output and \\temp and \input'
@@ -48,8 +55,17 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-for year in range(1999, 2014):
-    for quarter in range(1, 5):
+full_sample = False
+
+if full_sample:
+    year_range = range(1999, 2014)
+    quarter_range = range(1, 5)
+else:
+    year_range = [2013]
+    quarter_range = [4]
+    
+for year in year_range:
+    for quarter in quarter_range:
 
         carrier = 'AA'
           
@@ -62,8 +78,8 @@ for year in range(1999, 2014):
         
         print 'plot map with airports for ' + dst + ', save .png to \output, .bin to \\temp'
         
-        plot_map_with_airports.plot(dst, year, quarter)
-        
+        all_airports = plot_map_with_airports.plot(dst, year, quarter)
+       
         print 'add routes to map with airports'
         
         #https://docs.python.org/2/tutorial/controlflow.html#unpacking-argument-lists
@@ -74,6 +90,17 @@ for year in range(1999, 2014):
         route_options['carrier'] = carrier
         route_options['test'] = False
         route_options['constant_weight'] = False
+        route_options['erdos_renyi'] = True
+        route_options['all_airports'] = all_airports
+        
+        assert not (route_options['test'] and route_options['erdos_renyi'])
+        
+        if route_options['erdos_renyi']:
+            g = random_network.random_network(all_airports, 0.05)
+        else:
+            g = None
+            
+        route_options['g'] = g
         
         try:
             
@@ -90,6 +117,7 @@ for year in range(1999, 2014):
         print '[warning] \\temp airport instances must be regenerated for other periods'
 
 print 'move pyc files (byte code) from \code to \\temp'
+print 'move pyc files (byte code) from ' + src_random_network + ' to \\temp'
 
 src = '.\\'
 dst = '..\\temp\\'
@@ -102,3 +130,13 @@ for folder in [src + '*.pyc']:
         
         filename_split = filename.split('\\')[-1]
         shutil.move(filename, dst + filename_split)
+
+for folder in [src_random_network + '*.pyc']:
+    
+    folder_contents = glob.glob(folder)
+    
+    for filename in folder_contents:
+        
+        filename_split = filename.split('\\')[-1]
+        shutil.move(filename, dst + filename_split)
+        
