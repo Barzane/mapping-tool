@@ -10,10 +10,10 @@ import plot_blank_map
 import add_routes_to_map
 import make_route_list
 
-src_random_network = '..\\..\\..\\network-evolution\\build\\code\\'
-
-#http://stackoverflow.com/questions/279237/import-a-module-from-a-relative-path
-sys.path.append(src_random_network)
+#src_random_network = '..\\..\\..\\network-evolution\\build\\code\\'
+#
+##http://stackoverflow.com/questions/279237/import-a-module-from-a-relative-path
+#sys.path.append(src_random_network)
 
 import random_network
 
@@ -130,13 +130,4 @@ for folder in [src + '*.pyc']:
         
         filename_split = filename.split('\\')[-1]
         shutil.move(filename, dst + filename_split)
-
-for folder in [src_random_network + '*.pyc']:
-    
-    folder_contents = glob.glob(folder)
-    
-    for filename in folder_contents:
-        
-        filename_split = filename.split('\\')[-1]
-        shutil.move(filename, dst + filename_split)
-        
+     
