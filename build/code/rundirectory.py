@@ -96,7 +96,7 @@ for year in year_range:
         assert not (route_options['test'] and route_options['erdos_renyi'])
         
         if route_options['erdos_renyi']:
-            g = random_network.random_network(all_airports, 0.05)
+            g = random_network.random_network(all_airports, 0.02)
         else:
             g = None
             
