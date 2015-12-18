@@ -9,23 +9,18 @@ import plot_map_with_airports
 import plot_blank_map
 import add_routes_to_map
 import make_route_list
-
-#src_random_network = '..\\..\\..\\network-evolution\\build\\code\\'
-#
-##http://stackoverflow.com/questions/279237/import-a-module-from-a-relative-path
-#sys.path.append(src_random_network)
-
 import random_network
+import compute_density
 
-print
-print 'clear contents of \output and \\temp and \input'
-
-for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
-
-    folder_contents = glob.glob(folder)
-
-    for filename in folder_contents:
-        os.remove(filename)
+#print
+#print 'clear contents of \output and \\temp and \input'
+#
+#for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
+#
+#    folder_contents = glob.glob(folder)
+#
+#    for filename in folder_contents:
+#        os.remove(filename)
 
 src_blank_map = '..\\..\\data\\borders\\blank_map.bin'
 
@@ -67,7 +62,7 @@ else:
 for year in year_range:
     for quarter in quarter_range:
 
-        carrier = 'AA'
+        carrier = 'WN'
           
         print 'copy data_year_quarter.bin datafile from ..\data to \input'
         
@@ -79,7 +74,7 @@ for year in year_range:
         print 'plot map with airports for ' + dst + ', save .png to \output, .bin to \\temp'
         
         all_airports = plot_map_with_airports.plot(dst, year, quarter)
-       
+        
         print 'add routes to map with airports'
         
         #https://docs.python.org/2/tutorial/controlflow.html#unpacking-argument-lists
@@ -95,9 +90,18 @@ for year in year_range:
         
         assert not (route_options['test'] and route_options['erdos_renyi'])
         
+        print 'density for carrier', carrier, 'is',
+        
+        density = compute_density.density(year, quarter, carrier)
+        
+        print density
+            
         if route_options['erdos_renyi']:
-            g = random_network.random_network(all_airports, 0.02)
+            
+            g = random_network.random_network(all_airports, density)
+            
         else:
+            
             g = None
             
         route_options['g'] = g
@@ -111,8 +115,8 @@ for year in year_range:
             print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
             
             continue
-            
-        add_routes_to_map.add_routes(carrier, year, quarter, route_list, line_type='geodesic')
+                
+        add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], line_type='geodesic')
         
         print '[warning] \\temp airport instances must be regenerated for other periods'
 

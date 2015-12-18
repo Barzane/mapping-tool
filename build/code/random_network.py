@@ -6,6 +6,7 @@ import numpy as np
 
 def random_network(nodes, p):
     
+    p = p/2.0
     edge_matrix = np.random.choice([1,0], size=(len(nodes), len(nodes)), replace=True, p=[p, 1-p])
     edge_matrix = edge_matrix + edge_matrix.T
     np.fill_diagonal(edge_matrix, 0)
