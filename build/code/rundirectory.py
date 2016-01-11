@@ -50,7 +50,7 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-full_sample = False
+full_sample = True
 
 if full_sample:
     year_range = range(1999, 2014)
