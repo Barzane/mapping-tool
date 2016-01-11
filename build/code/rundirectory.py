@@ -121,7 +121,6 @@ for year in year_range:
         print '[warning] \\temp airport instances must be regenerated for other periods'
 
 print 'move pyc files (byte code) from \code to \\temp'
-print 'move pyc files (byte code) from ' + src_random_network + ' to \\temp'
 
 src = '.\\'
 dst = '..\\temp\\'
