@@ -62,7 +62,7 @@ else:
 for year in year_range:
     for quarter in quarter_range:
 
-        carrier = 'WN'
+        carrier = 'F9'
           
         print 'copy data_year_quarter.bin datafile from ..\data to \input'
         
@@ -85,16 +85,15 @@ for year in year_range:
         route_options['carrier'] = carrier
         route_options['test'] = False
         route_options['constant_weight'] = False
-        route_options['erdos_renyi'] = True
+        route_options['erdos_renyi'] = False
         route_options['all_airports'] = all_airports
         
         assert not (route_options['test'] and route_options['erdos_renyi'])
         
-        print 'density for carrier', carrier, 'is',
-        
-        density = compute_density.density(year, quarter, carrier)
-        
-        print density
+        if route_options['erdos_renyi']:
+            
+            density = compute_density.density(year, quarter, carrier) 
+            print 'density for carrier', carrier, 'is', density
             
         if route_options['erdos_renyi']:
             
