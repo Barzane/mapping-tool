@@ -12,15 +12,15 @@ import make_route_list
 import random_network
 import compute_density
 
-#print
-#print 'clear contents of \output and \\temp and \input'
-#
-#for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
-#
-#    folder_contents = glob.glob(folder)
-#
-#    for filename in folder_contents:
-#        os.remove(filename)
+print
+print 'clear contents of \output and \\temp and \input'
+
+for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
+
+    folder_contents = glob.glob(folder)
+
+    for filename in folder_contents:
+        os.remove(filename)
 
 src_blank_map = '..\\..\\data\\borders\\blank_map.bin'
 
