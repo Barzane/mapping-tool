@@ -34,7 +34,7 @@ def density(year, quarter, carrier):
     
     all_airlines = list_of_airlines(data)
     
-    assert (carrier in all_airlines    ), 'carrier not found'
+    assert (carrier in all_airlines), 'carrier not found'
     
     all_airports = list_of_airports(data)
     
@@ -46,8 +46,8 @@ def density(year, quarter, carrier):
     network_bar = (Nbar, gbar)
     
 #    D, average_path_length = distance_matrix(gbar)
-      
-    density, Pd = density_degree_distribution(network)      
+    
+    density, Pd = density_degree_distribution(network_bar)      
 #    density, Pd = density_degree_distribution(network_bar)
     
-    return density
+    return density, Nbar, gbar

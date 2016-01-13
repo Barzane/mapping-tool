@@ -2,7 +2,10 @@
 
 import cPickle
 
-def route(year, quarter, carrier, test, constant_weight, erdos_renyi, all_airports, g=None):
+def route(year, quarter, carrier, test, constant_weight, erdos_renyi, all_airports, Nbar, g=None):
+    
+    carrier_airports = Nbar.keys()
+    carrier_airports.sort()    
     
     if test:
         
@@ -25,8 +28,8 @@ def route(year, quarter, carrier, test, constant_weight, erdos_renyi, all_airpor
                 
                 if g[i][j] == 1:
                     
-                    origin = all_airports[i][0]
-                    dest = all_airports[j][0]
+                    origin = carrier_airports[i]
+                    dest = carrier_airports[j]
                     
                     route_list.append(([origin, dest], 0.1)) #constant line-width
     

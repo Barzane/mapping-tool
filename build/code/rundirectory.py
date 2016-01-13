@@ -50,7 +50,7 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-full_sample = True
+full_sample = False
 
 if full_sample:
     year_range = range(1999, 2014)
@@ -62,7 +62,7 @@ else:
 for year in year_range:
     for quarter in quarter_range:
 
-        carrier = 'F9'
+        carrier = 'WN'
           
         print 'copy data_year_quarter.bin datafile from ..\data to \input'
         
@@ -85,30 +85,31 @@ for year in year_range:
         route_options['carrier'] = carrier
         route_options['test'] = False
         route_options['constant_weight'] = False
-        route_options['erdos_renyi'] = False
+        route_options['erdos_renyi'] = True
         route_options['all_airports'] = all_airports
         
         assert not (route_options['test'] and route_options['erdos_renyi'])
         
         if route_options['erdos_renyi']:
             
-            density = compute_density.density(year, quarter, carrier) 
+            density, Nbar, gbar = compute_density.density(year, quarter, carrier) 
             print 'density for carrier', carrier, 'is', density
             
         if route_options['erdos_renyi']:
             
-            g = random_network.random_network(all_airports, density)
+            g = random_network.random_network(gbar, density)
             
         else:
             
             g = None
             
+        route_options['Nbar'] = Nbar
         route_options['g'] = g
         
         try:
             
             route_list = make_route_list.route(**route_options)
-        
+            
         except IndexError:
             
             print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
