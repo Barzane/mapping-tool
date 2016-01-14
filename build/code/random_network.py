@@ -14,6 +14,8 @@ def random_network(nodes, p):
     
     assert np.array_equal(g, g.T), 'g not symmetric' # g symmetric
     
+    g = g.astype(int)
+    
     return g
 
 #test case

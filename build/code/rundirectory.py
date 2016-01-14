@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, glob, shutil, os.path, sys
+import os, glob, shutil, os.path, sys, numpy
 
 import state_state_border_dictionary
 import mexico_us_canada_us_border_dictionary
@@ -11,6 +11,14 @@ import add_routes_to_map
 import make_route_list
 import random_network
 import compute_density
+from connected import connected
+from density_degree_distribution import density_degree_distribution
+from degree_centrality import degree_centrality
+from invert_dict import invert_dict
+from closeness_centrality import closeness_centrality
+from centrality_eigenvector import centrality_eigenvector
+from distance_matrix import distance_matrix
+from centrality_betweenness import all_centrality_betweenness
 
 print
 print 'clear contents of \output and \\temp and \input'
@@ -94,6 +102,7 @@ for year in year_range:
             
             density, Nbar, gbar = compute_density.density(year, quarter, carrier) 
             print 'density for carrier', carrier, 'is', density
+            inv_d = invert_dict(Nbar)
             
         if route_options['erdos_renyi']:
             
@@ -105,6 +114,48 @@ for year in year_range:
             
         route_options['Nbar'] = Nbar
         route_options['g'] = g
+        
+        if route_options['erdos_renyi']:
+            
+            number_nodes = len(gbar)
+            number_edges = sum(sum(gbar)) / 2
+            diameter_g = connected(g)
+            density, Pd = density_degree_distribution((Nbar, g))
+            DC = degree_centrality((Nbar, g))
+            CC = closeness_centrality(g)
+            eigenvector_map = centrality_eigenvector(g)
+            D, average_path_length = distance_matrix(g)
+            
+            if len(Nbar) > 2 and not numpy.isinf(average_path_length):
+                BC = all_centrality_betweenness(D)
+            
+            print '# nodes', number_nodes
+            print '# edges', number_edges
+            print 'diameter', diameter_g
+            print 'density', density
+            
+            print 'BC'
+            if len(Nbar) > 2 and not numpy.isinf(average_path_length):
+                for key in BC:
+                    if inv_d[key] == 'DEN':
+                        print inv_d[key], BC[key],
+            
+            print '\nCC'
+            for key in CC:
+                if inv_d[key] == 'DEN':
+                    print inv_d[key], CC[key],
+            
+            print '\nDC'
+            for key in DC:
+                if inv_d[key] == 'DEN':
+                    print inv_d[key], DC[key],
+            
+            print '\nEC'
+            for key in eigenvector_map:
+                if inv_d[key] == 'DEN':
+                    print inv_d[key], eigenvector_map[key],
+
+            print
         
         try:
             
