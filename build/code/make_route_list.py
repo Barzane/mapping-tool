@@ -2,7 +2,7 @@
 
 import cPickle
 
-def route(year, quarter, carrier, test, constant_weight, erdos_renyi, all_airports, Nbar, g=None):
+def route(year, quarter, carrier, test, constant_weight, erdos_renyi, pref_attachment, all_airports, Nbar, g=None):
     
     carrier_airports = Nbar.keys()
     carrier_airports.sort()    
@@ -19,7 +19,7 @@ def route(year, quarter, carrier, test, constant_weight, erdos_renyi, all_airpor
                     (['BHM','GSP'], 1.0),\
                     (['BHM','BLI'], 1.0)]    
     
-    elif erdos_renyi:
+    elif erdos_renyi or pref_attachment:
         
         route_list = []
 

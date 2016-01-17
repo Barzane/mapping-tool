@@ -12,17 +12,21 @@ def radian(degree):
 def degree(radian):
     return (180.0 / numpy.pi) * radian
         
-def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type):
+def add_routes(carrier, year, quarter, route_list, erdos_renyi, pref_attachment, line_type):
     
     src = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.bin'
 
-    if not erdos_renyi:
+    if not (erdos_renyi or pref_attachment):
 
         dst_png = '..\\output\\map_with_routes_' + carrier + '_' + str(year) + '_' + str(quarter) + '.png'
         
-    else:
+    elif erdos_renyi:
         
         dst_png = '..\\output\\map_with_routes_' + carrier + '(ErdosRenyi)_' + str(year) + '_' + str(quarter) + '.png'
+    
+    elif pref_attachment:
+    
+        dst_png = '..\\output\\map_with_routes_' + carrier + '(PrefAttach)_' + str(year) + '_' + str(quarter) + '.png'   
     
     f = open(src, 'r')
     fig = cPickle.load(f)

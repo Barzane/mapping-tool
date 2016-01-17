@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, glob, shutil, os.path, sys, numpy
+import os, glob, shutil, os.path, numpy
 
 import state_state_border_dictionary
 import mexico_us_canada_us_border_dictionary
@@ -19,6 +19,7 @@ from closeness_centrality import closeness_centrality
 from centrality_eigenvector import centrality_eigenvector
 from distance_matrix import distance_matrix
 from centrality_betweenness import all_centrality_betweenness
+import pure_pref_att_network
 
 print
 print 'clear contents of \output and \\temp and \input'
@@ -93,12 +94,15 @@ for year in year_range:
         route_options['carrier'] = carrier
         route_options['test'] = False
         route_options['constant_weight'] = False
-        route_options['erdos_renyi'] = True
+        route_options['erdos_renyi'] = False
+        route_options['pref_attachment'] = True
         route_options['all_airports'] = all_airports
         
         assert not (route_options['test'] and route_options['erdos_renyi'])
+        assert not (route_options['test'] and route_options['pref_attachment'])
+        assert not (route_options['erdos_renyi'] and route_options['pref_attachment'])
         
-        if route_options['erdos_renyi']:
+        if route_options['erdos_renyi'] or route_options['pref_attachment']:
             
             density, Nbar, gbar = compute_density.density(year, quarter, carrier) 
             print 'density for carrier', carrier, 'is', density
@@ -107,7 +111,11 @@ for year in year_range:
         if route_options['erdos_renyi']:
             
             g = random_network.random_network(gbar, density)
-            
+        
+        elif route_options['pref_attachment']:
+        
+            g = pure_pref_att_network.generate(range(len(gbar)), 6)
+        
         else:
             
             g = None
@@ -115,10 +123,10 @@ for year in year_range:
         route_options['Nbar'] = Nbar
         route_options['g'] = g
         
-        if route_options['erdos_renyi']:
+        if route_options['erdos_renyi'] or route_options['pref_attachment']:
             
-            number_nodes = len(gbar)
-            number_edges = sum(sum(gbar)) / 2
+            number_nodes = len(g)
+            number_edges = sum(sum(g)) / 2
             diameter_g = connected(g)
             density, Pd = density_degree_distribution((Nbar, g))
             DC = degree_centrality((Nbar, g))
@@ -167,7 +175,7 @@ for year in year_range:
             
             continue
                 
-        add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], line_type='geodesic')
+        add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], route_options['pref_attachment'], line_type='geodesic')
         
         print '[warning] \\temp airport instances must be regenerated for other periods'
 
