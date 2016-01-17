@@ -21,15 +21,15 @@ from distance_matrix import distance_matrix
 from centrality_betweenness import all_centrality_betweenness
 import pure_pref_att_network
 
-print
-print 'clear contents of \output and \\temp and \input'
-
-for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
-
-    folder_contents = glob.glob(folder)
-
-    for filename in folder_contents:
-        os.remove(filename)
+#print
+#print 'clear contents of \output and \\temp and \input'
+#
+#for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
+#
+#    folder_contents = glob.glob(folder)
+#
+#    for filename in folder_contents:
+#        os.remove(filename)
 
 src_blank_map = '..\\..\\data\\borders\\blank_map.bin'
 
@@ -114,7 +114,7 @@ for year in year_range:
         
         elif route_options['pref_attachment']:
         
-            g = pure_pref_att_network.generate(range(len(gbar)), 6)
+            g, g_dynamic = pure_pref_att_network.generate(range(len(gbar)), 6)
         
         else:
             
@@ -165,17 +165,44 @@ for year in year_range:
 
             print
         
-        try:
-            
-            route_list = make_route_list.route(**route_options)
-            
-        except IndexError:
-            
-            print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
-            
-            continue
-                
-        add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], route_options['pref_attachment'], line_type='geodesic')
+#        animation - conflict with single call of route_list?
+#        if route_options['pref_attachment']:
+#            
+#            route_list_fullsize = list()
+#            
+#            for g_dyn in g_dynamic:
+#                
+#                try:
+#            
+#                    route_options['g'] = g_dyn
+#                    route_list = make_route_list.route(**route_options)
+#                    route_list_fullsize.append(route_list[:])
+#                    
+#                except IndexError:
+#                    
+#                    print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
+#                    
+#                    continue
+#        
+#        counter = 0        
+#
+#        for route_list in route_list_fullsize:
+#            
+#            add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], route_options['pref_attachment'], 'geodesic', counter)
+#            
+#            counter += 1
+        
+#        try:
+#            
+#            route_list = make_route_list.route(**route_options)
+#            
+#        except IndexError:
+#            
+#            print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
+#            
+#            continue
+#                
+#        add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], route_options['pref_attachment'], 'geodesic')
         
         print '[warning] \\temp airport instances must be regenerated for other periods'
 

@@ -38,7 +38,13 @@ def generate(nodes, m0 = 1):
     
     #start edge matrix and connect the first 2 airports
     edges = np.ones((2, 2))
-    np.fill_diagonal(edges, 0) 
+    np.fill_diagonal(edges, 0)
+    
+    g_dynamic = list()
+    
+    g_fullsize = np.zeros((len(nodes), len(nodes)))
+    g_fullsize[0:2, 0:2] = edges.astype(int) #only if start with 2 airports!!   
+    g_dynamic.append(g_fullsize[:])
     
     running = True
     i = 0
@@ -68,6 +74,10 @@ def generate(nodes, m0 = 1):
         else:
             print "We ran out of airports."
             running = False
+        
+        g_fullsize = np.zeros((len(nodes), len(nodes)))
+        g_fullsize[0:len(edges), 0:len(edges)] = edges.astype(int)
+        g_dynamic.append(g_fullsize[:])
 
         i +=1 
             
@@ -82,4 +92,4 @@ def generate(nodes, m0 = 1):
 
     g = edges.astype(int)
     
-    return g
+    return g, g_dynamic
