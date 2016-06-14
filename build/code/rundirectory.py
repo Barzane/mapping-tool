@@ -63,8 +63,6 @@ clear_output_temp_input()
 
 horizontal()
 
-sss
-
 src_blank_map = '..\\..\\data\\borders\\blank_map.bin'
 
 #http://stackoverflow.com/questions/82831/check-whether-a-file-exists-using-python
@@ -92,6 +90,8 @@ if not os.path.isfile(src_blank_map):
 else:
     
     print src_blank_map + ' already exists: no rebuild'
+
+sss
 
 full_sample = False
 

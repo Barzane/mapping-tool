@@ -30,6 +30,7 @@ def plot():
     fig = matplotlib.pyplot.figure()
     
     for border in border_dict:
+        
         matplotlib.pyplot.plot(border_dict[border][0], border_dict[border][1],\
             color='b', linestyle='-')
     
@@ -46,6 +47,7 @@ def plot():
     matplotlib.pyplot.grid(True)
     
     for coast in coast_dict:
+        
             matplotlib.pyplot.plot(coast_dict[coast][0], coast_dict[coast][1],\
                 color='b', linestyle='-')    
     
