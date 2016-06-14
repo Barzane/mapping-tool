@@ -7,19 +7,21 @@ import mexico_us_canada_us_border_dictionary
 import coast_border_dictionary
 import plot_map_with_airports
 import plot_blank_map
-import add_routes_to_map
-import make_route_list
-import random_network
-import compute_density
-from connected import connected
-from density_degree_distribution import density_degree_distribution
-from degree_centrality import degree_centrality
-from invert_dict import invert_dict
-from closeness_centrality import closeness_centrality
-from centrality_eigenvector import centrality_eigenvector
-from distance_matrix import distance_matrix
-from centrality_betweenness import all_centrality_betweenness
-import pure_pref_att_network
+
+#import add_routes_to_map
+#import make_route_list
+#import random_network
+#
+#import compute_density
+#from connected import connected
+#from density_degree_distribution import density_degree_distribution
+#from degree_centrality import degree_centrality
+#from invert_dict import invert_dict
+#from closeness_centrality import closeness_centrality
+#from centrality_eigenvector import centrality_eigenvector
+#from distance_matrix import distance_matrix
+#from centrality_betweenness import all_centrality_betweenness
+#import pure_pref_att_network
 
 def horizontal():
     
@@ -28,6 +30,12 @@ def horizontal():
     print
     
     return None
+
+import access_external_functions
+
+horizontal()
+
+access_external_functions.set_path()
 
 def manual_transfer_reminder():
 
