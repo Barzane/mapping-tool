@@ -22,8 +22,10 @@ def build_dict():
             line_v = line.split()
             
             if border == []:
+                
                 border = [[float(line_v[1])], [float(line_v[0])]]
             else:
+                
                 border[0].append(float(line_v[1]))
                 border[1].append(float(line_v[0]))
         
