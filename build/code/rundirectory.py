@@ -173,8 +173,6 @@ for year in year_range:
             
             horizontal()
         
-        sss
-        
         if route_options['erdos_renyi']:
             
             g = random_network.random_network(gbar, density)
@@ -186,7 +184,9 @@ for year in year_range:
         else:
             
             g = None
-            
+        
+        sss
+        
         route_options['Nbar'] = Nbar
         route_options['g'] = g
         

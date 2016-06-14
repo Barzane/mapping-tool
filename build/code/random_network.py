@@ -1,24 +1,19 @@
-#Erdos-Renyi random network generator
-#input: (list of nodes, p)
-#output: adjacency matrix g
+# -*- coding: utf-8 -*-
 
-import numpy as np
+import numpy
 
-def random_network(nodes, p):
+def random_network(nodes, density):
     
-    p = p/2.0
-    edge_matrix = np.random.choice([1,0], size=(len(nodes), len(nodes)), replace=True, p=[p, 1-p])
+    p = density / 2.0
+    
+    edge_matrix = numpy.random.choice([1,0], size=(len(nodes), len(nodes)), replace=True, p=[p, 1-p])
     edge_matrix = edge_matrix + edge_matrix.T
-    np.fill_diagonal(edge_matrix, 0)
-    g = np.round(edge_matrix * 0.6)
+    numpy.fill_diagonal(edge_matrix, 0)
     
-    assert np.array_equal(g, g.T), 'g not symmetric' # g symmetric
+    g = numpy.round(edge_matrix * 0.6)
+    
+    assert numpy.array_equal(g, g.T), 'g not symmetric'
     
     g = g.astype(int)
     
     return g
-
-#test case
-
-#edges = random_network([0 for x in range(10)], 0.25)
-#print edges
