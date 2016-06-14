@@ -18,10 +18,12 @@ def build_dict():
         try:
             
             a = eval(line.split('coordinates":')[1].strip().split('}')[0].strip())
+            
             xx = []
             yy = []
             
             for item in a:
+                
                 xx.append(item[0])
                 yy.append(item[1])
                 
