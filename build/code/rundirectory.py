@@ -21,15 +21,49 @@ from distance_matrix import distance_matrix
 from centrality_betweenness import all_centrality_betweenness
 import pure_pref_att_network
 
-#print
-#print 'clear contents of \output and \\temp and \input'
-#
-#for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
-#
-#    folder_contents = glob.glob(folder)
-#
-#    for filename in folder_contents:
-#        os.remove(filename)
+def horizontal():
+    
+    print
+    print '-'*90
+    print
+    
+    return None
+
+def manual_transfer_reminder():
+
+    print 'manually transfer data_yyyy_q.bin datafiles (output from network-data) to data\\ before run'
+    print
+    print '** DISK SPACE REQUIREMENT: ~ 194 MB to store 60 quarterly datafiles (1999_1 to 2013_4) **'
+    
+#    raw_input('press a key to continue')
+    
+    return None
+
+def clear_output_temp_input():
+    
+    print 'clear contents of \output and \\temp and \input'
+
+    for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
+    
+        folder_contents = glob.glob(folder)
+    
+        for filename in folder_contents:
+            
+            os.remove(filename)
+    
+    return None
+
+horizontal()
+   
+manual_transfer_reminder()
+
+horizontal()
+    
+clear_output_temp_input()
+
+horizontal()
+
+sss
 
 src_blank_map = '..\\..\\data\\borders\\blank_map.bin'
 
