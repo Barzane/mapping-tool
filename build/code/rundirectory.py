@@ -13,14 +13,7 @@ import plot_blank_map
 #import random_network
 #
 #import compute_density
-#from connected import connected
-#from density_degree_distribution import density_degree_distribution
-#from degree_centrality import degree_centrality
-#from invert_dict import invert_dict
-#from closeness_centrality import closeness_centrality
-#from centrality_eigenvector import centrality_eigenvector
-#from distance_matrix import distance_matrix
-#from centrality_betweenness import all_centrality_betweenness
+
 #import pure_pref_att_network
 
 def horizontal():
@@ -36,6 +29,13 @@ import access_external_functions
 horizontal()
 
 access_external_functions.set_path()
+
+import connected
+import density_degree_distribution
+import degree_centrality
+import closeness_centrality
+import distance_matrix
+import centrality_betweenness
 
 def manual_transfer_reminder():
 
@@ -154,7 +154,7 @@ for year in year_range:
             
             density, Nbar, gbar = compute_density.density(year, quarter, carrier) 
             print 'density for carrier', carrier, 'is', density
-            inv_d = invert_dict(Nbar)
+            inv_d = invert_dict.invert_dict(Nbar)
             
         if route_options['erdos_renyi']:
             
@@ -175,15 +175,15 @@ for year in year_range:
             
             number_nodes = len(g)
             number_edges = sum(sum(g)) / 2
-            diameter_g = connected(g)
-            density, Pd = density_degree_distribution((Nbar, g))
-            DC = degree_centrality((Nbar, g))
-            CC = closeness_centrality(g)
-            eigenvector_map = centrality_eigenvector(g)
-            D, average_path_length = distance_matrix(g)
+            diameter_g = connected.connected(g)
+            density, Pd = density_degree_distribution.density_degree_distribution((Nbar, g))
+            DC = degree_centrality.degree_centrality((Nbar, g))
+            CC = closeness_centrality.closeness_centrality(g)
+            eigenvector_map = centrality_eigenvector.centrality_eigenvector(g)
+            D, average_path_length = distance_matrix.distance_matrix(g)
             
             if len(Nbar) > 2 and not numpy.isinf(average_path_length):
-                BC = all_centrality_betweenness(D)
+                BC = centrality_betweenness.all_centrality_betweenness(D)
             
             print '# nodes', number_nodes
             print '# edges', number_edges
