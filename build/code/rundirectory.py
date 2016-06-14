@@ -91,18 +91,22 @@ else:
     
     print src_blank_map + ' already exists: no rebuild'
 
-sss
+horizontal()
 
 full_sample = False
 
 if full_sample:
+    
     year_range = range(1999, 2014)
     quarter_range = range(1, 5)
+    
 else:
+    
     year_range = [2013]
     quarter_range = [4]
     
 for year in year_range:
+    
     for quarter in quarter_range:
 
         carrier = 'WN'
@@ -117,6 +121,8 @@ for year in year_range:
         print 'plot map with airports for ' + dst + ', save .png to \output, .bin to \\temp'
         
         all_airports = plot_map_with_airports.plot(dst, year, quarter)
+
+        sss
         
         print 'add routes to map with airports'
         

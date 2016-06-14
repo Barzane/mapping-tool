@@ -4,7 +4,7 @@ import cPickle, matplotlib
 
 #http://stackoverflow.com/questions/4142151/python-how-to-import-the-class-within-the-same-directory-or-sub-directory
 
-from airport_classes import *
+from airport_classes import Airport
 
 matplotlib.pyplot.ioff()
         
@@ -34,10 +34,12 @@ def plot(src, year, quarter):
         destination = list_v[1]
         
         if origin not in airport_dict:
+            
             airport_dict[origin] = Airport(data[key]['originLongitude'],\
                 data[key]['originLatitude'], origin)
         
         if destination not in airport_dict:
+            
             airport_dict[destination] = Airport(data[key]['destinationLongitude'],\
                 data[key]['destinationLatitude'], destination)   
     
@@ -56,8 +58,7 @@ def plot(src, year, quarter):
     
     all_airports.sort()
     
-    matplotlib.pyplot.title('AIRPORTS IN DATASET: ' + str(year) + 'Q' +\
-        str(quarter))
+#    matplotlib.pyplot.title(str(year) + 'Q' + str(quarter))
     
     f = open(dst_bin, 'w')
     cPickle.dump(fig, f)

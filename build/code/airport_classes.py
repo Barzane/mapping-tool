@@ -5,6 +5,7 @@ class IterRegistry(type):
 #    http://stackoverflow.com/questions/739882/iterating-over-object-instances-of-a-given-class-in-python
     
     def __iter__(cls):
+        
         return iter(cls._registry)
         
 class Airport:
