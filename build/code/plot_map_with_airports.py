@@ -58,7 +58,7 @@ def plot(src, year, quarter):
     
     all_airports.sort()
     
-#    matplotlib.pyplot.title(str(year) + 'Q' + str(quarter))
+    matplotlib.pyplot.title(str(year) + 'Q' + str(quarter))
     
     f = open(dst_bin, 'w')
     cPickle.dump(fig, f)
