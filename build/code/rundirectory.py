@@ -7,12 +7,11 @@ import mexico_us_canada_us_border_dictionary
 import coast_border_dictionary
 import plot_map_with_airports
 import plot_blank_map
+import compute_density
 
 #import add_routes_to_map
 #import make_route_list
 #import random_network
-#
-#import compute_density
 
 #import pure_pref_att_network
 
@@ -36,6 +35,7 @@ import degree_centrality
 import closeness_centrality
 import distance_matrix
 import centrality_betweenness
+import invert_dict
 
 def manual_transfer_reminder():
 
@@ -126,24 +126,29 @@ for year in year_range:
         
         shutil.copyfile(src, dst)
         
-        print 'plot map with airports for ' + dst + ', save .png to \output, .bin to \\temp'
+        print '\nplot map with airports for ' + dst + ', save .png to \output, .bin to \\temp'
+        
+        horizontal()        
         
         all_airports = plot_map_with_airports.plot(dst, year, quarter)
-
-        sss
         
-        print 'add routes to map with airports'
+        print 'add routes to map with airports\n'
         
         #https://docs.python.org/2/tutorial/controlflow.html#unpacking-argument-lists
         
-        route_options = {}
+        route_options = dict()
+        
         route_options['year'] = year
         route_options['quarter'] = quarter
         route_options['carrier'] = carrier
+
         route_options['test'] = False
+
         route_options['constant_weight'] = False
-        route_options['erdos_renyi'] = False
-        route_options['pref_attachment'] = True
+        
+        route_options['erdos_renyi'] = True
+        route_options['pref_attachment'] = False
+
         route_options['all_airports'] = all_airports
         
         assert not (route_options['test'] and route_options['erdos_renyi'])
@@ -151,11 +156,25 @@ for year in year_range:
         assert not (route_options['erdos_renyi'] and route_options['pref_attachment'])
         
         if route_options['erdos_renyi'] or route_options['pref_attachment']:
+                        
+            density, Nbar, gbar = compute_density.density(year, quarter, carrier)
             
-            density, Nbar, gbar = compute_density.density(year, quarter, carrier) 
-            print 'density for carrier', carrier, 'is', density
+            if route_options['erdos_renyi']:
+                
+                print 'Erdos-Renyi',
+                
+            else:
+                
+                print 'Preferential attachment (custom)',
+                
+            print 'density for carrier', carrier, 'is %.3f'%density
+
             inv_d = invert_dict.invert_dict(Nbar)
             
+            horizontal()
+        
+        sss
+        
         if route_options['erdos_renyi']:
             
             g = random_network.random_network(gbar, density)
