@@ -11,8 +11,6 @@ import plot_blank_map
 #import add_routes_to_map
 #import make_route_list
 
-#import pure_pref_att_network
-
 def horizontal():
     
     print
@@ -36,6 +34,8 @@ import distance_matrix
 import centrality_betweenness
 import invert_dict
 import random_network
+
+import pure_pref_att_network
 
 def manual_transfer_reminder():
 
@@ -146,8 +146,8 @@ for year in year_range:
 
         route_options['constant_weight'] = False
         
-        route_options['erdos_renyi'] = True
-        route_options['pref_attachment'] = False
+        route_options['erdos_renyi'] = False
+        route_options['pref_attachment'] = True
 
         route_options['all_airports'] = all_airports
         
@@ -184,7 +184,7 @@ for year in year_range:
         else:
             
             g = None
-        
+
         sss
 
         route_options['Nbar'] = Nbar
@@ -208,6 +208,8 @@ for year in year_range:
             print '# edges', number_edges
             print 'diameter', diameter_g
             print 'density', density
+            
+            sss
             
             print 'BC'
             if len(Nbar) > 2 and not numpy.isinf(average_path_length):
