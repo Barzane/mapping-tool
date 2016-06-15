@@ -7,11 +7,9 @@ import mexico_us_canada_us_border_dictionary
 import coast_border_dictionary
 import plot_map_with_airports
 import plot_blank_map
-import compute_density
 
 #import add_routes_to_map
 #import make_route_list
-#import random_network
 
 #import pure_pref_att_network
 
@@ -29,6 +27,7 @@ horizontal()
 
 access_external_functions.set_path()
 
+import compute_density
 import connected
 import density_degree_distribution
 import degree_centrality
@@ -36,6 +35,7 @@ import closeness_centrality
 import distance_matrix
 import centrality_betweenness
 import invert_dict
+import random_network
 
 def manual_transfer_reminder():
 
@@ -186,7 +186,7 @@ for year in year_range:
             g = None
         
         sss
-        
+
         route_options['Nbar'] = Nbar
         route_options['g'] = g
         

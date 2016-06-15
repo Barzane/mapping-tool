@@ -10,6 +10,9 @@ def random_network(nodes, density):
     edge_matrix = edge_matrix + edge_matrix.T
     numpy.fill_diagonal(edge_matrix, 0)
     
+#    print 'edge_matrix will contains values 0, 1, 2'
+#    print 'map 0 to 0, 1 to 1, 2 to 1'
+    
     g = numpy.round(edge_matrix * 0.6)
     
     assert numpy.array_equal(g, g.T), 'g not symmetric'
