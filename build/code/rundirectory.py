@@ -34,8 +34,7 @@ import distance_matrix
 import centrality_betweenness
 import invert_dict
 import random_network
-
-import pure_pref_att_network
+import centrality_eigenvector
 
 def manual_transfer_reminder():
 
@@ -141,32 +140,18 @@ for year in year_range:
         route_options['year'] = year
         route_options['quarter'] = quarter
         route_options['carrier'] = carrier
-
         route_options['test'] = False
-
-        route_options['constant_weight'] = False
-        
-        route_options['erdos_renyi'] = False
-        route_options['pref_attachment'] = True
-
+        route_options['constant_weight'] = False        
+        route_options['erdos_renyi'] = True
         route_options['all_airports'] = all_airports
         
         assert not (route_options['test'] and route_options['erdos_renyi'])
-        assert not (route_options['test'] and route_options['pref_attachment'])
-        assert not (route_options['erdos_renyi'] and route_options['pref_attachment'])
         
-        if route_options['erdos_renyi'] or route_options['pref_attachment']:
+        if route_options['erdos_renyi']:
                         
             density, Nbar, gbar = compute_density.density(year, quarter, carrier)
-            
-            if route_options['erdos_renyi']:
                 
-                print 'Erdos-Renyi',
-                
-            else:
-                
-                print 'Preferential attachment (custom)',
-                
+            print 'Erdos-Renyi',
             print 'density for carrier', carrier, 'is %.3f'%density
 
             inv_d = invert_dict.invert_dict(Nbar)
@@ -177,20 +162,14 @@ for year in year_range:
             
             g = random_network.random_network(gbar, density)
         
-        elif route_options['pref_attachment']:
-        
-            g, g_dynamic = pure_pref_att_network.generate(range(len(gbar)), 6)
-        
         else:
             
             g = None
 
-        sss
-
         route_options['Nbar'] = Nbar
         route_options['g'] = g
         
-        if route_options['erdos_renyi'] or route_options['pref_attachment']:
+        if route_options['erdos_renyi']:
             
             number_nodes = len(g)
             number_edges = sum(sum(g)) / 2
@@ -202,56 +181,54 @@ for year in year_range:
             D, average_path_length = distance_matrix.distance_matrix(g)
             
             if len(Nbar) > 2 and not numpy.isinf(average_path_length):
+                
                 BC = centrality_betweenness.all_centrality_betweenness(D)
             
+            print 'Erdos-Renyi'
             print '# nodes', number_nodes
             print '# edges', number_edges
             print 'diameter', diameter_g
             print 'density', density
             
-            sss
+            print '\nBC'
             
-            print 'BC'
             if len(Nbar) > 2 and not numpy.isinf(average_path_length):
+                
                 for key in BC:
+                    
                     if inv_d[key] == 'DEN':
+                        
                         print inv_d[key], BC[key],
             
             print '\nCC'
+            
             for key in CC:
+                
                 if inv_d[key] == 'DEN':
+                    
                     print inv_d[key], CC[key],
             
             print '\nDC'
+            
             for key in DC:
+                
                 if inv_d[key] == 'DEN':
+                    
                     print inv_d[key], DC[key],
             
             print '\nEC'
+            
             for key in eigenvector_map:
+                
                 if inv_d[key] == 'DEN':
+                    
                     print inv_d[key], eigenvector_map[key],
 
-            print
+            horizontal()
+            
+            sss
         
 #        animation - conflict with single call of route_list?
-#        if route_options['pref_attachment']:
-#            
-#            route_list_fullsize = list()
-#            
-#            for g_dyn in g_dynamic:
-#                
-#                try:
-#            
-#                    route_options['g'] = g_dyn
-#                    route_list = make_route_list.route(**route_options)
-#                    route_list_fullsize.append(route_list[:])
-#                    
-#                except IndexError:
-#                    
-#                    print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
-#                    
-#                    continue
 #        
 #        counter = 0        
 #
