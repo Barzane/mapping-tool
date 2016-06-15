@@ -2,14 +2,16 @@
 
 import cPickle, matplotlib, glob, numpy
 
-from airport_classes import *
+from airport_classes import Airport
 
 matplotlib.pyplot.ioff()
 
 def radian(degree):
+    
     return (numpy.pi / 180.0) * degree
     
 def degree(radian):
+    
     return (180.0 / numpy.pi) * radian
         
 def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, call_num=None):
@@ -74,16 +76,19 @@ def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, call_
             for airport in Airport:
                 
                 if airport.name == end1:
+                    
                     l1 = radian(airport.x)
                     p1 = radian(airport.y)
             
                 if airport.name == end2:
+                    
                     l2 = radian(airport.x)
                     p2 = radian(airport.y)
                     
 #            need error trap if endpoints not found
         
             if l1 > l2:
+                
                 l1, l2 = l2, l1
                 p1, p2 = p2, p1
             
@@ -93,8 +98,10 @@ def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, call_
             a0 = numpy.arcsin(numpy.sin(a1) * numpy.cos(p1))    
             
             if p1 == 0 and a1 == numpy.pi / 2:
+                
                 s01 = 0
             else:
+                
                 s01 = numpy.arctan2(numpy.tan(p1), numpy.cos(a1))
             
             l01 = numpy.arctan2(numpy.sin(a0) * numpy.sin(s01), numpy.cos(s01))    

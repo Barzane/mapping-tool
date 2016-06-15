@@ -8,9 +8,6 @@ import coast_border_dictionary
 import plot_map_with_airports
 import plot_blank_map
 
-#import add_routes_to_map
-#import make_route_list
-
 def horizontal():
     
     print
@@ -35,6 +32,8 @@ import centrality_betweenness
 import invert_dict
 import random_network
 import centrality_eigenvector
+import add_routes_to_map
+import make_route_list
 
 def manual_transfer_reminder():
 
@@ -115,8 +114,6 @@ else:
 for year in year_range:
     
     for quarter in quarter_range:
-
-        carrier = 'WN'
           
         print 'copy data_year_quarter.bin datafile from ..\data to \input'
         
@@ -129,128 +126,132 @@ for year in year_range:
         
         horizontal()        
         
-        all_airports = plot_map_with_airports.plot(dst, year, quarter)
+        all_airports, all_airlines = plot_map_with_airports.plot(dst, year, quarter)
         
-        print 'add routes to map with airports\n'
+        for carrier in all_airlines:
         
-        #https://docs.python.org/2/tutorial/controlflow.html#unpacking-argument-lists
-        
-        route_options = dict()
-        
-        route_options['year'] = year
-        route_options['quarter'] = quarter
-        route_options['carrier'] = carrier
-        route_options['test'] = False
-        route_options['constant_weight'] = False        
-        route_options['erdos_renyi'] = True
-        route_options['all_airports'] = all_airports
-        
-        assert not (route_options['test'] and route_options['erdos_renyi'])
-        
-        if route_options['erdos_renyi']:
+            print 'add routes to map with airports, carrier', carrier
+            
+            #https://docs.python.org/2/tutorial/controlflow.html#unpacking-argument-lists
+            
+            route_options = dict()
+                    
+            route_options['year'] = year
+            route_options['quarter'] = quarter
+            route_options['carrier'] = carrier
+            route_options['test'] = False
+            route_options['constant_weight'] = False        
+            route_options['erdos_renyi'] = False
+            route_options['all_airports'] = all_airports
+            
+            assert not (route_options['test'] and route_options['erdos_renyi'])
+            
+            if route_options['erdos_renyi']:
+                            
+                density, Nbar, gbar = compute_density.density(year, quarter, carrier)
+                    
+                print 'Erdos-Renyi',
+                print 'density for carrier', carrier, 'is %.3f'%density
+    
+                inv_d = invert_dict.invert_dict(Nbar)
+                
+                horizontal()
+            
+            if route_options['erdos_renyi']:
+                
+                g = random_network.random_network(gbar, density)
+            
+            else:
+                
+                g = None
+    
+            route_options['Nbar'] = Nbar
+            route_options['g'] = g
+            
+            if route_options['erdos_renyi']:
+                
+                number_nodes = len(g)
+                number_edges = sum(sum(g)) / 2
+                diameter_g = connected.connected(g)
+                density, Pd = density_degree_distribution.density_degree_distribution((Nbar, g))
+                DC = degree_centrality.degree_centrality((Nbar, g))
+                CC = closeness_centrality.closeness_centrality(g)
+                eigenvector_map = centrality_eigenvector.centrality_eigenvector(g)
+                D, average_path_length = distance_matrix.distance_matrix(g)
+                
+                if len(Nbar) > 2 and not numpy.isinf(average_path_length):
+                    
+                    BC = centrality_betweenness.all_centrality_betweenness(D)
+                
+                print 'Erdos-Renyi'
+                print '# nodes', number_nodes
+                print '# edges', number_edges
+                print 'diameter', diameter_g
+                print 'density', density
+                
+                print '\nBC'
+                
+                if len(Nbar) > 2 and not numpy.isinf(average_path_length):
+                    
+                    for key in BC:
                         
-            density, Nbar, gbar = compute_density.density(year, quarter, carrier)
+                        if inv_d[key] == 'DEN':
+                            
+                            print inv_d[key], BC[key],
                 
-            print 'Erdos-Renyi',
-            print 'density for carrier', carrier, 'is %.3f'%density
-
-            inv_d = invert_dict.invert_dict(Nbar)
-            
-            horizontal()
-        
-        if route_options['erdos_renyi']:
-            
-            g = random_network.random_network(gbar, density)
-        
-        else:
-            
-            g = None
-
-        route_options['Nbar'] = Nbar
-        route_options['g'] = g
-        
-        if route_options['erdos_renyi']:
-            
-            number_nodes = len(g)
-            number_edges = sum(sum(g)) / 2
-            diameter_g = connected.connected(g)
-            density, Pd = density_degree_distribution.density_degree_distribution((Nbar, g))
-            DC = degree_centrality.degree_centrality((Nbar, g))
-            CC = closeness_centrality.closeness_centrality(g)
-            eigenvector_map = centrality_eigenvector.centrality_eigenvector(g)
-            D, average_path_length = distance_matrix.distance_matrix(g)
-            
-            if len(Nbar) > 2 and not numpy.isinf(average_path_length):
+                print '\nCC'
                 
-                BC = centrality_betweenness.all_centrality_betweenness(D)
-            
-            print 'Erdos-Renyi'
-            print '# nodes', number_nodes
-            print '# edges', number_edges
-            print 'diameter', diameter_g
-            print 'density', density
-            
-            print '\nBC'
-            
-            if len(Nbar) > 2 and not numpy.isinf(average_path_length):
-                
-                for key in BC:
+                for key in CC:
                     
                     if inv_d[key] == 'DEN':
                         
-                        print inv_d[key], BC[key],
-            
-            print '\nCC'
-            
-            for key in CC:
+                        print inv_d[key], CC[key],
                 
-                if inv_d[key] == 'DEN':
-                    
-                    print inv_d[key], CC[key],
-            
-            print '\nDC'
-            
-            for key in DC:
+                print '\nDC'
                 
-                if inv_d[key] == 'DEN':
+                for key in DC:
                     
-                    print inv_d[key], DC[key],
-            
-            print '\nEC'
-            
-            for key in eigenvector_map:
+                    if inv_d[key] == 'DEN':
+                        
+                        print inv_d[key], DC[key],
                 
-                if inv_d[key] == 'DEN':
+                print '\nEC'
+                
+                for key in eigenvector_map:
                     
-                    print inv_d[key], eigenvector_map[key],
-
+                    if inv_d[key] == 'DEN':
+                        
+                        print inv_d[key], eigenvector_map[key],
+    
+                horizontal()
+                        
+    #        animation - conflict with single call of route_list?
+    #        
+    #        counter = 0        
+    #
+    #        for route_list in route_list_fullsize:
+    #            
+    #            add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], route_options['pref_attachment'], 'geodesic', counter)
+    #            
+    #            counter += 1
+            
+            try:
+                
+                route_list = make_route_list.route(**route_options)
+                
+            except IndexError:
+                
+                print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
+                
+                continue
+                    
+            add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], 'geodesic')
+            
             horizontal()
             
-            sss
-        
-#        animation - conflict with single call of route_list?
-#        
-#        counter = 0        
-#
-#        for route_list in route_list_fullsize:
-#            
-#            add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], route_options['pref_attachment'], 'geodesic', counter)
-#            
-#            counter += 1
-        
-#        try:
-#            
-#            route_list = make_route_list.route(**route_options)
-#            
-#        except IndexError:
-#            
-#            print '\n' + carrier + ' not found in ' + str(year) + 'Q' + str(quarter)
-#            
-#            continue
-#                
-#        add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], route_options['pref_attachment'], 'geodesic')
-        
-        print '[warning] \\temp airport instances must be regenerated for other periods'
+print '[warning] \\temp airport instances must be regenerated for other periods'
+    
+horizontal()
 
 print 'move pyc files (byte code) from \code to \\temp'
 

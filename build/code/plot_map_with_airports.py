@@ -2,6 +2,8 @@
 
 import cPickle, matplotlib
 
+import list_of_airlines
+
 #http://stackoverflow.com/questions/4142151/python-how-to-import-the-class-within-the-same-directory-or-sub-directory
 
 from airport_classes import Airport
@@ -24,6 +26,8 @@ def plot(src, year, quarter):
     f = open(src, 'r')
     data = cPickle.load(f)
     f.close()
+    
+    all_airlines = list_of_airlines.list_of_airlines(data)    
     
     airport_dict = {}
     
@@ -67,4 +71,4 @@ def plot(src, year, quarter):
     matplotlib.pyplot.savefig(dst_png, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
     
-    return all_airports
+    return all_airports, all_airlines
