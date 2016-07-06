@@ -5,8 +5,6 @@ import os, glob, shutil, os.path, numpy
 import state_state_border_dictionary
 import mexico_us_canada_us_border_dictionary
 import coast_border_dictionary
-import plot_map_with_airports
-import plot_blank_map
 
 def horizontal():
     
@@ -22,6 +20,8 @@ horizontal()
 
 access_external_functions.set_path()
 
+import plot_map_with_airports
+import plot_blank_map
 import compute_density
 import connected
 import density_degree_distribution
@@ -145,11 +145,11 @@ for year in year_range:
             route_options['all_airports'] = all_airports
             
             assert not (route_options['test'] and route_options['erdos_renyi'])
+
+            density, Nbar, gbar = compute_density.density(year, quarter, carrier)
             
             if route_options['erdos_renyi']:
-                            
-                density, Nbar, gbar = compute_density.density(year, quarter, carrier)
-                    
+                                                
                 print 'Erdos-Renyi',
                 print 'density for carrier', carrier, 'is %.3f'%density
     
@@ -248,6 +248,10 @@ for year in year_range:
             add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], 'geodesic')
             
             horizontal()
+            
+            if route_options['test']:
+                
+                break
             
 print '[warning] \\temp airport instances must be regenerated for other periods'
     

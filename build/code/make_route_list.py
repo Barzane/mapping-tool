@@ -9,16 +9,26 @@ def route(year, quarter, carrier, test, constant_weight, erdos_renyi, all_airpor
     
     if test:
         
-        route_list = [(['BHM','ATL'], 1.0),\
-                    (['BHM','BNA'], 1.0),\
-                    (['BHM','LIT'], 1.0),\
-                    (['BHM','AUS'], 1.0),\
-                    (['BHM','ECP'], 1.0),\
-                    (['BHM','MCO'], 1.0),\
-                    (['BHM','STL'], 1.0),\
-                    (['BHM','GSP'], 1.0),\
-                    (['BHM','BLI'], 1.0)]    
+        route_list = [(['JFK','SFO'], 1),\
+                    (['JFK','ORD'], 1),\
+                    (['ORD','SFO'], 1)]    
     
+#        route_list = [(['LGA','DFW'], 0.5),\
+#                    (['DFW','MSP'], 0.5),\
+#                    (['LGA','MIA'], 0.5),\
+#                    (['MIA','MSP'], 0.5),\
+#                    (['LGA','ORD'], 0.5),\
+#                    (['ORD','MSP'], 0.5)] 
+
+#        route_list = [(['LGA','DFW'], 1),\
+#                    (['DFW','MSP'], 1)]
+
+#        route_list = [(['LGA','MIA'], 1),\
+#                    (['MIA','MSP'], 1)]
+
+#        route_list = [(['LGA','ORD'], 1),\
+#                    (['ORD','MSP'], 1)] 
+   
     elif erdos_renyi:
         
         route_list = []
