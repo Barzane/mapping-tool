@@ -14,13 +14,19 @@ def degree(radian):
     
     return (180.0 / numpy.pi) * radian
         
-def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, call_num=None):
+def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, highlight_nodes, call_num=None):
     
     src = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.bin'
 
     if not erdos_renyi:
+        
+        if highlight_nodes:
 
-        dst_png = '..\\output\\map_with_routes_' + carrier + '_' + str(year) + '_' + str(quarter) + '.png'
+            dst_png = '..\\output\\map_with_routes_' + carrier + '_' + str(year) + '_' + str(quarter) + '_circle_nodes.png'
+            
+        else:
+            
+            dst_png = '..\\output\\map_with_routes_' + carrier + '_' + str(year) + '_' + str(quarter) + '.png'
         
     else:
         
@@ -129,6 +135,30 @@ def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, call_
     else:
         
         raise NotImplementedError('line type must be linear or geodesic')
+    
+    if highlight_nodes:
+        
+        ax = fig.gca()
+        
+        if year == 2013 and quarter == 4:
+
+            if carrier == 'AA':
+                
+                for airport in Airport:
+                
+                    if airport.name in ['DFW', 'ORD', 'OKC', 'AUS']:
+                            
+                            circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
+                            ax.add_artist(circle)
+                        
+            if carrier == 'AS':
+            
+                for airport in Airport:
+                    
+                    if airport.name in ['SEA', 'PDX', 'GEG']:
+                        
+                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
+                        ax.add_artist(circle)
     
     matplotlib.pyplot.savefig(dst_png, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
