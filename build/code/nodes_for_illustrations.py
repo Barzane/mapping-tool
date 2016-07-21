@@ -8,53 +8,30 @@ def example_nodes(carrier, fig):
     
     ax = fig.gca()
 
-    if carrier == 'AA':
+    def plot_circle(airport_list):
         
         for airport in Airport:
+            
+            if airport.name in airport_list:
+                
+                circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
+                ax.add_artist(circle)
         
-            if airport.name in ['DFW', 'ORD', 'OKC', 'AUS']:
-                    
-                circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                ax.add_artist(circle)
-                
-    elif carrier == 'AS':
-    
-        for airport in Airport:
-            
-            if airport.name in ['SEA', 'PDX', 'GEG']:
-                
-                circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                ax.add_artist(circle)
-                
-    elif carrier == 'B6':
-    
-        for airport in Airport:
-            
-            if airport.name in ['JFK', 'BOS', 'FLL', 'IAD']:
-                
-                circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                ax.add_artist(circle)
-                
-    elif carrier == 'DL':
-    
-        for airport in Airport:
-            
-            if airport.name in ['ATL', 'MSP', 'DTW', 'BNA', 'CLT']:
-                
-                circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                ax.add_artist(circle)
-                
-    elif carrier == 'F9':
-    
-        for airport in Airport:
-            
-            if airport.name in ['DEN', 'ABQ', 'SLC', 'OMA']:
-                
-                circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                ax.add_artist(circle)
-    
-    else:
+        return None
 
+    carrier_airport_list = dict()
+    carrier_airport_list['AA'] = ['DFW', 'ORD', 'OKC', 'AUS']
+    carrier_airport_list['AS'] = ['SEA', 'PDX', 'GEG']
+    carrier_airport_list['B6'] = ['JFK', 'BOS', 'FLL', 'IAD']
+    carrier_airport_list['DL'] = ['ATL', 'MSP', 'DTW', 'BNA', 'CLT']
+    carrier_airport_list['F9'] = ['DEN', 'ABQ', 'SLC', 'OMA']
+    
+    if carrier in carrier_airport_list:
+        
+        plot_circle(carrier_airport_list[carrier])
+        
+    else:
+        
         pass
         
     return None
