@@ -25,6 +25,7 @@ def example_nodes(carrier, fig):
     carrier_airport_list['B6'] = ['JFK', 'BOS', 'FLL', 'IAD']
     carrier_airport_list['DL'] = ['ATL', 'MSP', 'DTW', 'BNA', 'CLT']
     carrier_airport_list['F9'] = ['DEN', 'ABQ', 'SLC', 'OMA']
+    carrier_airport_list['WN'] = ['MDW', 'LAS', 'BWI', 'PHX', 'STL', 'DEN']
     
     if carrier in carrier_airport_list:
         
