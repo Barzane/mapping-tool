@@ -4,6 +4,8 @@ import cPickle, matplotlib, glob, numpy
 
 from airport_classes import Airport
 
+import nodes_for_illustrations
+
 matplotlib.pyplot.ioff()
 
 def radian(degree):
@@ -136,56 +138,9 @@ def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, highl
         
         raise NotImplementedError('line type must be linear or geodesic')
     
-    if highlight_nodes:
+    if highlight_nodes and year == 2013 and quarter == 4:
         
-        ax = fig.gca()
-        
-        if year == 2013 and quarter == 4:
-
-            if carrier == 'AA':
-                
-                for airport in Airport:
-                
-                    if airport.name in ['DFW', 'ORD', 'OKC', 'AUS']:
-                            
-                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                        ax.add_artist(circle)
-                        
-            if carrier == 'AS':
-            
-                for airport in Airport:
-                    
-                    if airport.name in ['SEA', 'PDX', 'GEG']:
-                        
-                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                        ax.add_artist(circle)
-                        
-            if carrier == 'B6':
-            
-                for airport in Airport:
-                    
-                    if airport.name in ['JFK', 'BOS', 'FLL', 'IAD']:
-                        
-                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                        ax.add_artist(circle)
-                        
-            if carrier == 'DL':
-            
-                for airport in Airport:
-                    
-                    if airport.name in ['ATL', 'MSP', 'DTW', 'BNA', 'CLT']:
-                        
-                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                        ax.add_artist(circle)
-                        
-            if carrier == 'F9':
-            
-                for airport in Airport:
-                    
-                    if airport.name in ['DEN', 'ABQ', 'SLC', 'OMA']:
-                        
-                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                        ax.add_artist(circle)
+        nodes_for_illustrations.example_nodes(carrier, fig)
     
     matplotlib.pyplot.savefig(dst_png, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
