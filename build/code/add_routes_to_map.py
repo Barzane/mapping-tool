@@ -177,6 +177,15 @@ def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, highl
                         
                         circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
                         ax.add_artist(circle)
+                        
+            if carrier == 'F9':
+            
+                for airport in Airport:
+                    
+                    if airport.name in ['DEN', 'ABQ', 'SLC', 'OMA']:
+                        
+                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
+                        ax.add_artist(circle)
     
     matplotlib.pyplot.savefig(dst_png, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
