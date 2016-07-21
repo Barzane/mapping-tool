@@ -148,14 +148,23 @@ def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, highl
                 
                     if airport.name in ['DFW', 'ORD', 'OKC', 'AUS']:
                             
-                            circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
-                            ax.add_artist(circle)
+                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
+                        ax.add_artist(circle)
                         
             if carrier == 'AS':
             
                 for airport in Airport:
                     
                     if airport.name in ['SEA', 'PDX', 'GEG']:
+                        
+                        circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
+                        ax.add_artist(circle)
+                        
+            if carrier == 'B6':
+            
+                for airport in Airport:
+                    
+                    if airport.name in ['JFK', 'BOS', 'FLL']:
                         
                         circle = matplotlib.pyplot.Circle((airport.x, airport.y), 2, color='b', fill=False, linewidth=3)
                         ax.add_artist(circle)
