@@ -3,6 +3,7 @@
 import cPickle, matplotlib
 
 import list_of_airlines
+import nodes_for_illustrations
 
 #http://stackoverflow.com/questions/4142151/python-how-to-import-the-class-within-the-same-directory-or-sub-directory
 
@@ -10,7 +11,7 @@ from airport_classes import Airport
 
 matplotlib.pyplot.ioff()
         
-def plot(src, year, quarter):
+def plot(src, year, quarter, highlight_nodes=False):
 
     matplotlib.pyplot.close('all')
     
@@ -47,7 +48,7 @@ def plot(src, year, quarter):
             airport_dict[destination] = Airport(data[key]['destinationLongitude'],\
                 data[key]['destinationLatitude'], destination)   
     
-    all_airports = list()    
+    all_airports = list()  
     
     for airport in Airport:
         
@@ -63,6 +64,10 @@ def plot(src, year, quarter):
     all_airports.sort()
     
     matplotlib.pyplot.title(str(year) + 'Q' + str(quarter))
+    
+    if highlight_nodes and year == 2013 and quarter == 4:
+        
+        nodes_for_illustrations.example_nodes('', fig)
     
     f = open(dst_bin, 'w')
     cPickle.dump(fig, f)

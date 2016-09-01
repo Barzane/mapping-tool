@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, glob, shutil, os.path, numpy
+import os, glob, shutil, os.path, numpy, sys
 
 import state_state_border_dictionary
 import mexico_us_canada_us_border_dictionary
@@ -126,8 +126,35 @@ for year in year_range:
         
         horizontal()        
         
-        all_airports, all_airlines = plot_map_with_airports.plot(dst, year, quarter)
+        nodes_on_blank_map = True
         
+        if not nodes_on_blank_map:
+            
+            all_airports, all_airlines = plot_map_with_airports.plot(dst, year, quarter)
+
+        else:
+            
+            if year == 2013 and quarter == 4:
+            
+                 all_airports, all_airlines = plot_map_with_airports.plot(dst, year, quarter, True)
+             
+                 print 'Copy map_2013_4.png illustrative plot from ..\\temp to \output'
+                 
+                 src_png = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.png'
+                 dst_png = '..\\output\\map_dominant_hubs_' + str(year) + '_' + str(quarter) + '.png'
+                 
+                 shutil.copyfile(src_png, dst_png)
+
+                 print '\nExit code'
+                 
+                 horizontal()
+                 
+                 raise SystemError
+                 
+            else:
+                
+                raise NotImplementedError('set nodes_on_blank_map = False if not 2013Q4')
+            
         for carrier in all_airlines:
         
             print 'add routes to map with airports, carrier', carrier

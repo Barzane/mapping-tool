@@ -27,6 +27,11 @@ def example_nodes(carrier, fig):
     carrier_airport_list['F9'] = ['DEN', 'ABQ', 'SLC', 'OMA']
     carrier_airport_list['WN'] = ['MDW', 'LAS', 'BWI', 'PHX', 'STL', 'DEN', 'HOU']
     
+#    highlight nodes on blank map with airports (no routes)
+    
+    carrier_airport_list[''] = ['ATL', 'DFW', 'SEA', 'JFK', 'DEN', 'MSP',\
+                                'ORD', 'PHX', 'CLT', 'SFO', 'LAX', 'MDW', 'STL']
+    
     if carrier in carrier_airport_list:
         
         plot_circle(carrier_airport_list[carrier])
