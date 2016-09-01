@@ -126,7 +126,7 @@ for year in year_range:
         
         horizontal()        
         
-        nodes_on_blank_map = True
+        nodes_on_blank_map = False
         
         if not nodes_on_blank_map:
             
