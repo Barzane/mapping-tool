@@ -170,7 +170,7 @@ for year in year_range:
             route_options['constant_weight'] = False        
             route_options['erdos_renyi'] = False
             route_options['all_airports'] = all_airports
-            route_options['highlight_nodes'] = True
+            route_options['highlight_nodes'] = False
             
             assert not (route_options['test'] and route_options['erdos_renyi'])
 
@@ -273,7 +273,7 @@ for year in year_range:
                 
                 continue
             
-            highlight_nodes = True
+            highlight_nodes = False
             
             add_routes_to_map.add_routes(carrier, year, quarter, route_list, route_options['erdos_renyi'], 'geodesic', highlight_nodes)
             
