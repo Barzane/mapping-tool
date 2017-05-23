@@ -136,20 +136,20 @@ for year in year_range:
             
             if year == 2013 and quarter == 4:
             
-                 all_airports, all_airlines = plot_map_with_airports.plot(dst, year, quarter, True)
+                all_airports, all_airlines = plot_map_with_airports.plot(dst, year, quarter, True)
              
-                 print 'Copy map_2013_4.png illustrative plot from ..\\temp to \output'
+                print 'Copy map_2013_4.png illustrative plot from ..\\temp to \output'
                  
-                 src_png = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.png'
-                 dst_png = '..\\output\\map_dominant_hubs_' + str(year) + '_' + str(quarter) + '.png'
+                src_png = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.png'
+                dst_png = '..\\output\\map_dominant_hubs_' + str(year) + '_' + str(quarter) + '.png'
                  
-                 shutil.copyfile(src_png, dst_png)
+                shutil.copyfile(src_png, dst_png)
 
-                 print '\nExit code'
+                print '\nExit code'
                  
-                 horizontal()
+                horizontal()
                  
-                 raise SystemError
+                raise SystemError
                  
             else:
                 

@@ -29,8 +29,11 @@ def example_nodes(carrier, fig):
     
 #    highlight nodes on blank map with airports (no routes)
     
+#    carrier_airport_list[''] = ['ATL', 'DFW', 'SEA', 'JFK', 'DEN', 'MSP',\
+#                                'ORD', 'PHX', 'CLT', 'SFO', 'LAX', 'MDW', 'STL']
+                                
     carrier_airport_list[''] = ['ATL', 'DFW', 'SEA', 'JFK', 'DEN', 'MSP',\
-                                'ORD', 'PHX', 'CLT', 'SFO', 'LAX', 'MDW', 'STL']
+                                'ORD', 'PHX', 'SFO', 'MDW']
     
     if carrier in carrier_airport_list:
         
