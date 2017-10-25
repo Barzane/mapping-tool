@@ -13,7 +13,7 @@ def set_path():
     
     currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
     uppath = lambda _path, n: os.sep.join(_path.split(os.sep)[:-n])
-    externaldir = uppath(currentdir, 3) + '\\network-data\\build\\code'
+    externaldir = uppath(currentdir, 3) + '\\network_data\\build\\code'
     
     def check_duplicate_names():
 
