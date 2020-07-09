@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import matplotlib
+import matplotlib, matplotlib.pyplot
 
 from airport_classes import Airport
 
