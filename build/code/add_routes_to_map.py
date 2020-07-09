@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import cPickle, glob, matplotlib, numpy
+import cPickle, glob, matplotlib, matplotlib.pyplot, numpy
 
 from airport_classes import Airport
 

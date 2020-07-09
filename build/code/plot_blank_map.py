@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import cPickle, matplotlib
+import cPickle, matplotlib, matplotlib.pyplot
 
 matplotlib.pyplot.ioff()
         
@@ -55,9 +55,17 @@ def plot():
     
     fig.set_size_inches(8, 6, forward=True)
     fig.tight_layout()
-    
-    f = open(dst, 'w')
+        
+    f = open(dst, 'wb')
     cPickle.dump(fig, f)
     f.close()
+    
+    print 'test load'
+    
+    f = open(dst, 'rb')
+    test = cPickle.load(f)
+    f.close()
+    
+    sss
     
     return None

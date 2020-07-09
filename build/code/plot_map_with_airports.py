@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import cPickle, imp, matplotlib
+import cPickle, imp, matplotlib, matplotlib.pyplot
 
 list_of_airlines = imp.load_source('list_of_airlines', '../../../network_data/build/code/list_of_airlines.py')
 
@@ -20,10 +20,11 @@ def plot(src, year, quarter, highlight_nodes=False):
     
     dst_png = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.png'
     dst_bin = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.bin'
-
-    f = open(src_blank_map, 'r')
+        
+    f = open(src_blank_map, 'rb')
+        
     fig = cPickle.load(f)
-    f.close()    
+    f.close()
     
     f = open(src, 'r')
     data = cPickle.load(f)

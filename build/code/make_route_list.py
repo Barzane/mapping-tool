@@ -11,7 +11,7 @@ def route(year, quarter, carrier, test, constant_weight, erdos_renyi,\
     if test:
         
 #        node_list = ['DAY', 'DEN', 'MCO']
-#        node_list = ['ABQ', 'DAL', 'HOU', 'MCI']
+        node_list = ['ABQ', 'DAL', 'HOU', 'MCI']
 #        node_list = ['BNA', 'BWI', 'DEN', 'HOU', 'LAS', 'MCI',\
 #                    'MDW', 'MSY', 'PHX', 'STL', 'TPA']
         
@@ -23,32 +23,32 @@ def route(year, quarter, carrier, test, constant_weight, erdos_renyi,\
 #                
 #                route_list.append(([node_list[i], node_list[j]], 1))
 
-        route_list = [(['DAL','OKC'], 1.5),\
-                    (['OKC','LAS'], 1.5),\
-                    (['LAS','SAT'], 1.5),
-                    (['SAT','DAL'], 1.5)]
-        
-        route_list += [(['BNA', 'JAX'], 1.5),\
-                    (['BWI', 'JAX'], 1.5),
-                    (['JAX', 'MDW'], 1.5),
-                    (['MDW', 'BNA'], 1.5),
-                    (['BNA', 'BWI'], 1.5),
-                    (['BWI', 'MDW'], 1.5)]           
-        
-        route_list += [(['DEN', 'MSP'], 1.5),\
-                    (['DEN', 'PDX'], 1.5),\
-                    (['DEN', 'SFO'], 1.5)]
+#        route_list = [(['DAL','OKC'], 1.5),\
+#                    (['OKC','LAS'], 1.5),\
+#                    (['LAS','SAT'], 1.5),
+#                    (['SAT','DAL'], 1.5)]
+#        
+#        route_list += [(['BNA', 'JAX'], 1.5),\
+#                    (['BWI', 'JAX'], 1.5),
+#                    (['JAX', 'MDW'], 1.5),
+#                    (['MDW', 'BNA'], 1.5),
+#                    (['BNA', 'BWI'], 1.5),
+#                    (['BWI', 'MDW'], 1.5)]           
+#        
+#        route_list += [(['DEN', 'MSP'], 1.5),\
+#                    (['DEN', 'PDX'], 1.5),\
+#                    (['DEN', 'SFO'], 1.5)]
                     
 #        route_list = [(['DAY','DEN'], 1),\
 #                    (['DEN','MCO'], 1),\
 #                    (['MCO','DAY'], 1)]
 
-#        route_list = [(['ABQ','DAL'], 1),\
-#                    (['DAL','HOU'], 1),\
-#                    (['HOU','MCI'], 1),\
-#                    (['MCI','ABQ'], 1),\
-#                    (['ABQ','HOU'], 1),\
-#                    (['DAL','MCI'], 1)]
+        route_list = [(['ABQ','DAL'], 1),\
+                    (['DAL','HOU'], 1),\
+                    (['HOU','MCI'], 1),\
+                    (['MCI','ABQ'], 1),\
+                    (['ABQ','HOU'], 1),\
+                    (['DAL','MCI'], 1)]
                     
 #        route_list = [(['JFK','SFO'], 1),\
 #                    (['JFK','ORD'], 1),\

@@ -17,18 +17,15 @@ def horizontal():
 connected = imp.load_source('connected', '../../../network_data/build/code/connected.py')
 density_degree_distribution = imp.load_source('density_degree_distribution', '../../../network_data/build/code/density_degree_distribution.py')
 degree_centrality = imp.load_source('degree_centrality', '../../../network_data/build/code/degree_centrality.py')
-closeness_centrality = imp.load_source('closeness_centrality', '../../../network_data/build/code/closeness_centrality.py')
 distance_matrix = imp.load_source('distance_matrix', '../../../network_data/build/code/distance_matrix.py')
-centrality_betweenness = imp.load_source('centrality_betweenness', '../../../network_data/build/code/centrality_betweenness.py')
+closeness_centrality = imp.load_source('closeness_centrality', '../../../network_data/build/code/closeness_centrality.py')
 invert_dict = imp.load_source('invert_dict', '../../../network_data/build/code/invert_dict.py')
+shortest_paths = imp.load_source('shortest_paths', '../../../network_data/build/code/shortest_paths.py')
+centrality_betweenness = imp.load_source('centrality_betweenness', '../../../network_data/build/code/centrality_betweenness.py')
 centrality_eigenvector = imp.load_source('centrality_eigenvector', '../../../network_data/build/code/centrality_eigenvector.py')
 
-import add_routes_to_map, compute_density, plot_blank_map
-import plot_map_with_airports, random_network
-
-
-
-import make_route_list
+import add_routes_to_map, compute_density, make_route_list
+import plot_blank_map, plot_map_with_airports, random_network
 
 def manual_transfer_reminder():
 
@@ -124,9 +121,9 @@ for year in year_range:
         nodes_on_blank_map = False
         
         if not nodes_on_blank_map:
-            
+                                    
             all_airports, all_airlines = plot_map_with_airports.plot(dst, year, quarter)
-
+            
         else:
             
             if year == 2013 and quarter == 4:
@@ -149,7 +146,7 @@ for year in year_range:
             else:
                 
                 raise NotImplementedError('set nodes_on_blank_map = False if not 2013Q4')
-            
+        
         for carrier in ['WN']:
         
             print 'add routes to map with airports, carrier', carrier
