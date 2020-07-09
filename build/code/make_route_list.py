@@ -2,7 +2,8 @@
 
 import cPickle
 
-def route(year, quarter, carrier, test, constant_weight, erdos_renyi, all_airports, Nbar, highlight_nodes, g=None):
+def route(year, quarter, carrier, test, constant_weight, erdos_renyi,\
+          all_airports, Nbar, highlight_nodes, g=None):
     
     carrier_airports = Nbar.keys()
     carrier_airports.sort()    

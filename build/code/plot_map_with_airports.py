@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import cPickle, matplotlib
+import cPickle, imp, matplotlib
 
-import list_of_airlines
+list_of_airlines = imp.load_source('list_of_airlines', '../../../network_data/build/code/list_of_airlines.py')
+
 import nodes_for_illustrations
 
 #http://stackoverflow.com/questions/4142151/python-how-to-import-the-class-within-the-same-directory-or-sub-directory

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import cPickle
+import cPickle, imp
 
-import list_of_airlines
-import list_of_airports
-import map_airports_code
-import adjacency_matrix
-import remove_zeros
-import density_degree_distribution
+list_of_airlines = imp.load_source('list_of_airlines', '../../../network_data/build/code/list_of_airlines.py')
+list_of_airports = imp.load_source('list_of_airports', '../../../network_data/build/code/list_of_airports.py')
+map_airports_code = imp.load_source('map_airports_code', '../../../network_data/build/code/map_airports_code.py')
+adjacency_matrix = imp.load_source('adjacency_matrix', '../../../network_data/build/code/adjacency_matrix.py')
+remove_zeros = imp.load_source('remove_zeros', '../../../network_data/build/code/remove_zeros.py')
+density_degree_distribution = imp.load_source('density_degree_distribution', '../../../network_data/build/code/density_degree_distribution.py')
 
 def density(year, quarter, carrier):
 
