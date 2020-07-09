@@ -69,7 +69,7 @@ def add_routes(carrier, year, quarter, route_list, erdos_renyi, line_type, highl
         
         return None
     
-    def add_geodesic_to_plot(routes, col='k', lwd=5.0):
+    def add_geodesic_to_plot(routes, col='k', lwd=3.0):
             
         for route in routes:
             

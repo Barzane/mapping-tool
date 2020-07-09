@@ -20,6 +20,7 @@ def plot(src, year, quarter, highlight_nodes=False):
     
     dst_png = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.png'
     dst_bin = '..\\temp\\map_' + str(year) + '_' + str(quarter) + '.bin'
+    dst_airports_bin = '..\\temp\\map_airports_' + str(year) + '_' + str(quarter) + '.bin'
         
     f = open(src_blank_map, 'rb')
         
@@ -50,7 +51,9 @@ def plot(src, year, quarter, highlight_nodes=False):
             airport_dict[destination] = Airport(data[key]['destinationLongitude'],\
                 data[key]['destinationLatitude'], destination)   
     
-    all_airports = list()  
+    all_airports = list()
+    
+    airport_hold = {}
     
     for airport in Airport:
         
@@ -61,7 +64,13 @@ def plot(src, year, quarter, highlight_nodes=False):
         
         f = open('..\\temp\\airport_' + airport.name + '.bin', 'wb')
         cPickle.dump(airport, f)
-        f.close()        
+        f.close()
+        
+        airport_hold[airport.name] = [airport.x, airport.y]
+    
+    f = open(dst_airports_bin, 'w')
+    cPickle.dump(airport_hold, f)
+    f.close()
     
     all_airports.sort()
     
