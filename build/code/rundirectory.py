@@ -155,7 +155,7 @@ for year in year_range:
                 
                 raise NotImplementedError('set nodes_on_blank_map = False if not 2013Q4')
             
-        for carrier in all_airlines:
+        for carrier in ['WN']:
         
             print 'add routes to map with airports, carrier', carrier
             
@@ -166,7 +166,7 @@ for year in year_range:
             route_options['year'] = year
             route_options['quarter'] = quarter
             route_options['carrier'] = carrier
-            route_options['test'] = False
+            route_options['test'] = True
             route_options['constant_weight'] = False        
             route_options['erdos_renyi'] = False
             route_options['all_airports'] = all_airports
