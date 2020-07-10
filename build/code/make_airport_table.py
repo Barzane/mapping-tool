@@ -13,6 +13,8 @@ def build(year, quarter, path = ''):
     airports = data.keys()
     airports.sort()
     
+    output_filename = 'list_of_airports_' + str(year) + '_' + str(quarter)
+    
     output = '\\begin{table}'
     output += '\n\\scriptsize'
     output += '\n\\begin{center}'
@@ -52,21 +54,19 @@ def build(year, quarter, path = ''):
     output += '\\end{tabular}'
     output += '\n\\caption{' + caption + '}'
         
-    output += '\n\\label{tab:XXX}'
+    output += '\n\\label{tab:' + output_filename + '}'
     output += '\n\\end{center}'
     output += '\n\\end{table}'
     
     dst = '..\\output\\'
-    
-    output_filename = 'list_of_airports_' + str(year) + '_' + str(quarter) + '.tex'
-    
-    f = open(dst + output_filename, 'w')    
+        
+    f = open(dst + output_filename + '.tex', 'w')    
     f.write(output)
     f.close()
     
     print output
     print
     
-    print '\\input{' + output_filename + '}\n'
+    print '\\input{' + output_filename + '.tex}\n'
     
     return None
