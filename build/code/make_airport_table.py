@@ -2,9 +2,9 @@
 
 import cPickle
 
-def build(year, quarter):
+def build(year, quarter, path = ''):
 
-    src = '..\\temp\\map_airports_' + str(year) + '_' + str(quarter) + '.bin'
+    src = path + '..\\temp\\map_airports_' + str(year) + '_' + str(quarter) + '.bin'
     
     f = open(src, 'r')
     data = cPickle.load(f)
@@ -45,7 +45,7 @@ def build(year, quarter):
             output += ' & '
             
     caption = 'Title. List of airports by IATA code in ' + str(year) + 'Q' + str(quarter) + ', all carriers. \
-                Also longitude (x) and latitude (y). The identify of the airport corresponding to each \
+                Also longitude (x) and latitude (y). The identity of the airport corresponding to each \
                 IATA code can be found at \url{http://www.iata.org/en/publications/directories/code-search/}. \
                 Discussion.' 
                             
