@@ -45,11 +45,12 @@ for airport in airports:
         
         output += ' & '
         
-caption = 'Title. The identify of the airport corresponding to each \
+caption = 'Title. List of airports by IATA code in ' + str(year) + 'Q' + str(quarter) + ', all carriers. \
+            Also longitude (x) and latitude (y). The identify of the airport corresponding to each \
             IATA code can be found at \url{http://www.iata.org/en/publications/directories/code-search/}. \
             Discussion.' 
                         
-output += '\n\\end{tabular}'
+output += '\\end{tabular}'
 output += '\n\\caption{' + caption + '}'
     
 output += '\n\\label{tab:XXX}'
@@ -57,7 +58,7 @@ output += '\n\\end{center}'
 output += '\n\\end{table}'
 
 dst = '..\\output\\'
-output_filename = 'XXX.tex'
+output_filename = 'list_of_airports_' + str(year) + 'Q' + str(quarter) + '.tex'
 
 f = open(dst + output_filename, 'w')    
 f.write(output)
@@ -66,5 +67,5 @@ f.close()
 print output
 print
 
-print '\\input{XXX.tex}\n'
+print '\\input{' + output_filename + '}\n'
     
