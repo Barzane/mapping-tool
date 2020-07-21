@@ -27,7 +27,7 @@ def build(year, quarter, path = ''):
             
         output += name + ' & '
             
-    output += '\\\ \\hline'
+    output += '\\hline'
     output += '\n ' + '& ' * 12 + '\\\ \n'    
     
     tick = 0
