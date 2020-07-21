@@ -46,10 +46,9 @@ def build(year, quarter, path = ''):
             
             output += ' & '
             
-    caption = 'Title. List of airports by IATA code in ' + str(year) + 'Q' + str(quarter) + ', all carriers. \
-                Also longitude (x) and latitude (y). The identity of the airport corresponding to each \
-                IATA code can be found at \url{http://www.iata.org/en/publications/directories/code-search/}. \
-                Discussion.' 
+    caption = 'List of airports by IATA code in ' + str(year) + 'Q' + str(quarter) + ', all carriers, \
+                with their longitude (x) and latitude (y). The identity of the airport corresponding to each \
+                IATA code can be found at \\url{http:' + '/' + '/' + 'www.iata.org/en/publications/directories/code-search/}.' 
                             
     output += '\\end{tabular}'
     output += '\n\\caption{' + caption + '}'
