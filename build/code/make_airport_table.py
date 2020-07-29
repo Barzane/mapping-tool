@@ -21,14 +21,16 @@ def build(year, quarter, path = ''):
     
     col_names = ['code', 'x', 'y', ''] * 3
     
-    output += '\n\\begin{tabular}{' + 'lrrc' * 3 + '}\n'
+    output += '\n\\begin{tabular}{' + 'lrrclrrclrr' + '}\n'
         
     for name in col_names:
             
         output += name + ' & '
+        
+    output = output[:-6]
             
-    output += '\\hline'
-    output += '\n ' + '& ' * 12 + '\\\ \n'    
+    output += '\\\ \\hline'
+    output += '\n ' + '& ' * 10 + '\\\ \n'    
     
     tick = 0
         
@@ -40,6 +42,7 @@ def build(year, quarter, path = ''):
         
         if tick % 3 == 0:
             
+            output = output[:-3]
             output += '\\\ \n'
             
         else:
